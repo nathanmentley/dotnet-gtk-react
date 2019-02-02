@@ -34,8 +34,8 @@ namespace dnetreact
             context = new ComponentContext<RenderableType, StateType, PropsType>(_component, props, children, this);
         }
 
-        public void ForceUpdate() {
-            _Render();
+        public BaseRenderable ForceUpdate() {
+            return _Render();
         }
 
         public void OnComponentStateUpdate() {
@@ -52,10 +52,12 @@ namespace dnetreact
             }
         }
 
-        protected void _Render() {
+        protected BaseRenderable _Render() {
             component.WillRender(context);
             RenderResult<RenderableType> result = new RenderResult<RenderableType>(component.Render(context));
             component.DidRender(context);
+
+            return result.GetData();
         }
 
         public void Dispose() {

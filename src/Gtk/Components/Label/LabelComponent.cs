@@ -21,24 +21,17 @@ namespace dnetreact
         public override LabelResult Render(ComponentContext<LabelResult, LabelState, LabelProps> context) {
             return new LabelResult() {
                 LabelData = new LabelResult.LabelResultObject() {
-                    id = "_button1",
+                    id = "_label1",
                     label = context.GetProps().label,
                     visible = true,
-                    canFocus = true,
-                    receivesDefault = true
+                    canFocus = true
                 },
                 PackingDetails = new PackingStructure() {
                     expand = true,
                     fill = true,
-                    position = 1
+                    position = 0
                 }
             };
-        }
-
-        private void OnClick(ComponentContext<LabelResult, LabelState, LabelProps> context) {
-            if(context.GetProps().OnClick != null) {
-                context.GetProps().OnClick();
-            }
         }
     }
 }

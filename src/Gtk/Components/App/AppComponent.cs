@@ -9,6 +9,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
 
 using Gtk;
 
@@ -99,7 +102,27 @@ namespace dnetreact
             var window = MainAppWindow.Create(glade);
             window.Show();
 
-            return null;
+            AppResult ret = new AppResult() {
+                requires = new AppResult.Requires(),
+                children = context.GetRenderedChildren()
+            };
+
+            Console.WriteLine(GenerateGlad(ret));
+
+            return ret;
+        }
+
+        private String GenerateGlad(AppResult ret) {
+            XmlSerializer xsSubmit = new XmlSerializer(typeof(AppResult));
+            
+            using(StringWriter sww = new StringWriter())
+            {
+                using(XmlWriter writer = XmlWriter.Create(sww))
+                {
+                    xsSubmit.Serialize(writer, ret);
+                    return sww.ToString(); // Your XML
+                }
+            }
         }
     }
 }

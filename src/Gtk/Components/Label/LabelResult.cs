@@ -26,8 +26,6 @@ namespace dnetreact
             public Boolean visible { get; set; }
             [XmlElement("can_focus")]
             public Boolean canFocus { get; set; }
-            [XmlElement("receives_default")]
-            public Boolean receivesDefault { get; set; }
         }
 
         [XmlElement("object")]

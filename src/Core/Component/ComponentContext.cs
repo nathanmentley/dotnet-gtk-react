@@ -10,6 +10,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace dnetreact
 {
@@ -43,6 +44,10 @@ namespace dnetreact
 
         public IList<IComponentProcessor> GetChildren() {
             return children;
+        }
+
+        public List<BaseRenderable> GetRenderedChildren() {
+            return GetChildren().Select(x => x.ForceUpdate()).Where(x => x != null).ToList();
         }
 
         public StateType GetState() {

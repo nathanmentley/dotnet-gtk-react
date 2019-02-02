@@ -12,5 +12,9 @@ using System;
 
 namespace dnetreact
 {
-    public class WindowProps: BaseProps {}
+    public class WindowProps: BaseProps {
+        //public String id { get; set; }
+        public String title { get; set; }
+        //public Boolean canFocus { get; set; }
+    }
 }

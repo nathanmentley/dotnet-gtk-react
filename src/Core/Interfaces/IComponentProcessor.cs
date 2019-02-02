@@ -13,6 +13,6 @@ using System;
 namespace dnetreact
 {
     public interface IComponentProcessor: IDisposable {
-        void ForceUpdate();
+        BaseRenderable ForceUpdate();
     }
 }

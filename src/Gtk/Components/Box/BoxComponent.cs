@@ -21,24 +21,9 @@ namespace dnetreact
         public override BoxResult Render(ComponentContext<BoxResult, BoxState, BoxProps> context) {
             return new BoxResult() {
                 BoxData = new BoxResult.BoxResultObject() {
-                    id = "_button1",
-                    label = context.GetProps().label,
-                    visible = true,
-                    canFocus = true,
-                    receivesDefault = true
-                },
-                PackingDetails = new PackingStructure() {
-                    expand = true,
-                    fill = true,
-                    position = 1
+                    children = context.GetRenderedChildren()
                 }
             };
-        }
-
-        private void OnClick(ComponentContext<BoxResult, BoxState, BoxProps> context) {
-            if(context.GetProps().OnClick != null) {
-                context.GetProps().OnClick();
-            }
         }
     }
 }

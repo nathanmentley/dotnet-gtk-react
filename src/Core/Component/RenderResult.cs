@@ -20,5 +20,9 @@ namespace dnetreact
         public RenderResult(RenderableType _data) {
             data = _data;
         }
+
+        public RenderableType GetData() {
+            return data;
+        }
     }
 }

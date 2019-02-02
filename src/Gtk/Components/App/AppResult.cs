@@ -9,8 +9,23 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
+using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace dnetreact
 {
-    public class AppResult: BaseRenderable {}
+    public class AppResult: BaseRenderable {
+        public class Requires {
+            [XmlAttribute("lib")]
+            public String lib { get { return "gtk+"; } }
+            [XmlAttribute("version")]
+            public String version { get { return "3.18"; } }
+        }
+
+        [XmlElement("requires")]
+        public Requires requires { get; set; }
+
+        [XmlElement("object")]
+        public List<BaseRenderable> children { get; set; }
+    }
 }

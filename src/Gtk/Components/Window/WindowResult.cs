@@ -9,8 +9,27 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
+using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace dnetreact
 {
-    public class WindowResult: BaseRenderable {}
+    public class WindowResult: BaseRenderable {
+        [XmlAttribute("class")]
+        public String className { get { return "GtkWindow"; } }
+        [XmlAttribute("id")]
+        public String id { get; set; }
+
+        [XmlElement("can_focus")]
+        public Boolean canFocus { get; set; }
+        [XmlElement("title")]
+        public String title { get; set; }
+        [XmlElement("default_width")]
+        public Int32 defaultWidth { get; set; }
+        [XmlElement("default_height")]
+        public Int32 defaultHeight { get; set; }
+
+        [XmlElement("child")]
+        public List<BaseRenderable> children { get; set; }
+    }
 }

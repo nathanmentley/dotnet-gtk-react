@@ -18,7 +18,14 @@ namespace dnetreact
         }
 
         public override WindowResult Render(ComponentContext<WindowResult, WindowState, WindowProps> context) {
-            return null;
+            return new WindowResult(){
+                id = "MainWindow",
+                canFocus = false,
+                title = context.GetProps().title,
+                defaultWidth = 240,
+                defaultHeight = 240,
+                children = context.GetRenderedChildren()
+            };
         }
     }
 }
