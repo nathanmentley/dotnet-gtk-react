@@ -13,33 +13,26 @@ using System.Xml.Serialization;
 
 namespace dnetreact
 {
-    public class ButtonComponent: Component<ButtonResult, ButtonState, ButtonProps>{
-        public override ButtonState GetInitialState(ButtonProps props) {
-            return new ButtonState();
+    public class LabelResult: BaseRenderable {
+        public class LabelResultObject {
+            [XmlAttribute("class")]
+            public String className { get { return "GtkLabel"; } }
+            [XmlAttribute("id")]
+            public String id { get; set; }
+
+            [XmlElement("label")]
+            public String label { get; set; }
+            [XmlElement("visible")]
+            public Boolean visible { get; set; }
+            [XmlElement("can_focus")]
+            public Boolean canFocus { get; set; }
+            [XmlElement("receives_default")]
+            public Boolean receivesDefault { get; set; }
         }
 
-        public override ButtonResult Render(ComponentContext<ButtonResult, ButtonState, ButtonProps> context) {
-            return new ButtonResult() {
-                ButtonData = new ButtonResult.ButtonResultObject() {
-                    id = "_button1",
-                    label = context.GetProps().label,
-                    visible = true,
-                    canFocus = true,
-                    receivesDefault = true
-                },
-                PackingDetails = new PackingStructure() {
-                    expand = true,
-                    fill = true,
-                    position = 1
-                }
-            };
-        }
-
-        private void OnClick(ComponentContext<ButtonResult, ButtonState, ButtonProps> context) {
-            if(context.GetProps().OnClick != null) {
-                context.GetProps().OnClick();
-            }
-        }
+        [XmlElement("object")]
+        public LabelResultObject LabelData { get; set; }
+        [XmlElement("packing")]
+        public PackingStructure PackingDetails { get; set; }
     }
 }
-

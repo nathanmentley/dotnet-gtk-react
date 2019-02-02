@@ -9,6 +9,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
+using System.Collections.Generic;
 
 namespace dnetreact
 {
@@ -18,7 +19,15 @@ namespace dnetreact
         {
             Console.WriteLine("Hello World!");
 
-            GtkAppRunner.Execute(new WindowComponent(), new WindowProps());
+            GtkAppRunner.Execute(
+                new WindowComponent(), new WindowProps(), new List<IComponentProcessor>() {
+                    new ComponentProcessor<BoxResult, BoxState, BoxProps>(new BoxComponent(), new BoxProps(), new List<IComponentProcessor>() {
+                            new ComponentProcessor<LabelResult, LabelState, LabelProps>(new LabelComponent(), new LabelProps()),
+                            new ComponentProcessor<ButtonResult, ButtonState, ButtonProps>(new ButtonComponent(), new ButtonProps())
+                        }
+                    )
+                }
+            );
         }
     }
 }

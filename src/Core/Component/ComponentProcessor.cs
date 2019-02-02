@@ -24,8 +24,12 @@ namespace dnetreact
         private ComponentContext<RenderableType, StateType, PropsType> context;
 
         public ComponentProcessor(
-                Component<RenderableType, StateType, PropsType> _component, PropsType props, IList<IComponentProcessor> children
+                Component<RenderableType, StateType, PropsType> _component, PropsType props, IList<IComponentProcessor> children = null
         ) {
+            if(children == null) {
+                children = new List<IComponentProcessor>();
+            }
+
             component = _component;
             context = new ComponentContext<RenderableType, StateType, PropsType>(_component, props, children, this);
         }

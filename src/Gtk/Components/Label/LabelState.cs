@@ -12,13 +12,7 @@ using System;
 
 namespace dnetreact
 {
-    public class WindowComponent: Component<WindowResult, WindowState, WindowProps>{
-        public override WindowState GetInitialState(WindowProps props) {
-            return new WindowState();
-        }
-
-        public override WindowResult Render(ComponentContext<WindowResult, WindowState, WindowProps> context) {
-            return null;
-        }
+    public class LabelState: BaseState {
+        public LabelState() {}
     }
 }

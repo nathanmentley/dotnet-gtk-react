@@ -17,5 +17,7 @@ namespace dnetreact
         public String label { get; set; }
         //public Boolean visible { get; set; }
         //public Boolean canFocus { get; set; }
+
+        public Action OnClick { get; set; }
     }
 }

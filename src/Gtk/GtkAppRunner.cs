@@ -35,8 +35,8 @@ namespace dnetreact
         {
             _Run(
                 new GtkWidgetToolkit(),
-                new WindowComponent(),
-                new WindowProps(),
+                new AppComponent(),
+                new AppProps(),
                 new List<IComponentProcessor>() {
                     new ComponentProcessor<RenderableType, StateType, PropsType>(component, props, children)
                 }

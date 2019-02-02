@@ -13,14 +13,14 @@ using System.Xml.Serialization;
 
 namespace dnetreact
 {
-    public class ButtonComponent: Component<ButtonResult, ButtonState, ButtonProps>{
-        public override ButtonState GetInitialState(ButtonProps props) {
-            return new ButtonState();
+    public class LabelComponent: Component<LabelResult, LabelState, LabelProps>{
+        public override LabelState GetInitialState(LabelProps props) {
+            return new LabelState();
         }
 
-        public override ButtonResult Render(ComponentContext<ButtonResult, ButtonState, ButtonProps> context) {
-            return new ButtonResult() {
-                ButtonData = new ButtonResult.ButtonResultObject() {
+        public override LabelResult Render(ComponentContext<LabelResult, LabelState, LabelProps> context) {
+            return new LabelResult() {
+                LabelData = new LabelResult.LabelResultObject() {
                     id = "_button1",
                     label = context.GetProps().label,
                     visible = true,
@@ -35,7 +35,7 @@ namespace dnetreact
             };
         }
 
-        private void OnClick(ComponentContext<ButtonResult, ButtonState, ButtonProps> context) {
+        private void OnClick(ComponentContext<LabelResult, LabelState, LabelProps> context) {
             if(context.GetProps().OnClick != null) {
                 context.GetProps().OnClick();
             }
