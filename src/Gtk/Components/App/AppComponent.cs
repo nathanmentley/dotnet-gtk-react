@@ -10,6 +10,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 using System;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -40,7 +41,6 @@ namespace dnetreact
         <Button />
     </Box>
 </Window>
- */
         private String glade {
             get {
                 return @"
@@ -93,34 +93,46 @@ namespace dnetreact
 ";
             }
         }
+ */
 
         public override AppState GetInitialState(AppProps props) {
             return new AppState();
         }
 
         public override AppResult Render(ComponentContext<AppResult, AppState, AppProps> context) {
-            var window = MainAppWindow.Create(glade);
-            window.Show();
+            Console.WriteLine("render app children: " + context.GetRenderedChildren().Count);
 
             AppResult ret = new AppResult() {
                 requires = new AppResult.Requires(),
                 children = context.GetRenderedChildren()
             };
 
-            Console.WriteLine(GenerateGlad(ret));
+            var glade = GenerateGlad(ret);
+            Console.WriteLine(glade);
+            var window = MainAppWindow.Create(GenerateGlad(ret));
+            window.Show();
 
             return ret;
         }
 
         private String GenerateGlad(AppResult ret) {
-            XmlSerializer xsSubmit = new XmlSerializer(typeof(AppResult));
+            XmlSerializer xsSubmit = new XmlSerializer(typeof(AppResult), new Type[] {
+                typeof(BoxResult),
+                typeof(ButtonResult),
+                typeof(LabelResult),
+                typeof(WindowResult)
+            });
             
             using(StringWriter sww = new StringWriter())
             {
                 using(XmlWriter writer = XmlWriter.Create(sww))
                 {
-                    xsSubmit.Serialize(writer, ret);
-                    return sww.ToString(); // Your XML
+                    XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+                    ns.Add("","");
+                    xsSubmit.Serialize(writer, ret, ns);
+                    String xml = sww.ToString(); // Your XML
+
+                    return xml;
                 }
             }
         }

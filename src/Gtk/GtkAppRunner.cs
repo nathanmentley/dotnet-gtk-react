@@ -15,7 +15,9 @@ namespace dnetreact
 {
     public class GtkAppRunner: AppRunner {
         public static void Execute<RenderableType, StateType, PropsType>(
-                Component<RenderableType, StateType, PropsType> component, PropsType props, IList<IComponentProcessor> children = null
+            Component<RenderableType, StateType, PropsType> component,
+            PropsType props,
+            IList<IComponentProcessor> children = null
         )
             where RenderableType: BaseRenderable
             where StateType: BaseState
@@ -23,11 +25,13 @@ namespace dnetreact
         {
             GtkAppRunner runner = new GtkAppRunner();
 
-            runner.Run(component, props);
+            runner.Run(component, props, children);
         }
 
         protected void Run<RenderableType, StateType, PropsType>(
-            Component<RenderableType, StateType, PropsType> component, PropsType props, IList<IComponentProcessor> children = null
+            Component<RenderableType, StateType, PropsType> component,
+            PropsType props,
+            IList<IComponentProcessor> children = null
         )
             where RenderableType: BaseRenderable
             where StateType: BaseState
@@ -38,7 +42,11 @@ namespace dnetreact
                 new AppComponent(),
                 new AppProps(),
                 new List<IComponentProcessor>() {
-                    new ComponentProcessor<RenderableType, StateType, PropsType>(component, props, children)
+                    new ComponentProcessor<RenderableType, StateType, PropsType>(
+                        component,
+                        props,
+                        children
+                    )
                 }
             );
         }

@@ -9,6 +9,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace dnetreact
@@ -19,18 +20,54 @@ namespace dnetreact
         }
 
         public override ButtonResult Render(ComponentContext<ButtonResult, ButtonState, ButtonProps> context) {
+            Console.WriteLine("render button children: " + context.GetRenderedChildren().Count);
+/*
+            [XmlElement("label")]
+            public String label { get; set; }
+            [XmlElement("visible")]
+            public Boolean visible { get; set; }
+            [XmlElement("can_focus")]
+            public Boolean canFocus { get; set; }
+            [XmlElement("receives_default")]
+            public Boolean receivesDefault { get; set; }*/
+
             return new ButtonResult() {
                 ButtonData = new ButtonResult.ButtonResultObject() {
                     id = "_button1",
-                    label = context.GetProps().label,
-                    visible = true,
-                    canFocus = true,
-                    receivesDefault = true
+                    properties = new List<PropertyStructure>() {
+                        new PropertyStructure() {
+                            name = "label",
+                            value = context.GetProps().label
+                        },
+                        new PropertyStructure() {
+                            name = "visible",
+                            value = "True"
+                        },
+                        new PropertyStructure() {
+                            name = "can_focus",
+                            value = "True"
+                        },
+                        new PropertyStructure() {
+                            name = "receives_default",
+                            value = "True"
+                        }
+                    }
                 },
                 PackingDetails = new PackingStructure() {
-                    expand = true,
-                    fill = true,
-                    position = 1
+                    properties = new List<PropertyStructure>() {
+                        new PropertyStructure() {
+                            name = "expand",
+                            value = "True"
+                        },
+                        new PropertyStructure() {
+                            name = "fill",
+                            value = "True"
+                        },
+                        new PropertyStructure() {
+                            name = "position",
+                            value = "1"
+                        }
+                    }
                 }
             };
         }

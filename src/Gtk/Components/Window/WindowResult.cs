@@ -16,18 +16,12 @@ namespace dnetreact
 {
     public class WindowResult: BaseRenderable {
         [XmlAttribute("class")]
-        public String className { get { return "GtkWindow"; } }
+        public String className { get { return "GtkWindow"; } set {} }
         [XmlAttribute("id")]
         public String id { get; set; }
 
-        [XmlElement("can_focus")]
-        public Boolean canFocus { get; set; }
-        [XmlElement("title")]
-        public String title { get; set; }
-        [XmlElement("default_width")]
-        public Int32 defaultWidth { get; set; }
-        [XmlElement("default_height")]
-        public Int32 defaultHeight { get; set; }
+        [XmlElement("property")]
+        public List<PropertyStructure> properties { get; set; }
 
         [XmlElement("child")]
         public List<BaseRenderable> children { get; set; }

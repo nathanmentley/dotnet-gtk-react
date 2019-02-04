@@ -9,6 +9,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace dnetreact
@@ -19,10 +20,42 @@ namespace dnetreact
         }
 
         public override BoxResult Render(ComponentContext<BoxResult, BoxState, BoxProps> context) {
+            Console.WriteLine("render box children: " + context.GetRenderedChildren().Count);
+
             return new BoxResult() {
                 BoxData = new BoxResult.BoxResultObject() {
-                    children = context.GetRenderedChildren()
-                }
+                    children = context.GetRenderedChildren(),
+                    properties = new List<PropertyStructure>() {
+                        new PropertyStructure() {
+                            name = "visible",
+                            value = "True"
+                        },
+                        new PropertyStructure() {
+                            name = "can_focus",
+                            value = "False"
+                        },
+                        new PropertyStructure() {
+                            name = "margin_left",
+                            value = "4"
+                        },
+                        new PropertyStructure() {
+                            name = "margin_right",
+                            value = "4"
+                        },
+                        new PropertyStructure() {
+                            name = "margin_top",
+                            value = "4"
+                        },
+                        new PropertyStructure() {
+                            name = "margin_bottom",
+                            value = "4"
+                        },
+                        new PropertyStructure() {
+                            name = "orientation",
+                            value = "vertical"
+                        },
+                    }
+                },
             };
         }
     }

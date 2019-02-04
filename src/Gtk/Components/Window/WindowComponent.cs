@@ -9,6 +9,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
+using System.Collections.Generic;
 
 namespace dnetreact
 {
@@ -18,12 +19,28 @@ namespace dnetreact
         }
 
         public override WindowResult Render(ComponentContext<WindowResult, WindowState, WindowProps> context) {
+            Console.WriteLine("render window children: " + context.GetRenderedChildren().Count);
+
             return new WindowResult(){
                 id = "MainWindow",
-                canFocus = false,
-                title = context.GetProps().title,
-                defaultWidth = 240,
-                defaultHeight = 240,
+                properties = new List<PropertyStructure>() {
+                    new PropertyStructure() {
+                        name = "can_focus",
+                        value = "false"
+                    },
+                    new PropertyStructure() {
+                        name = "title",
+                        value = context.GetProps().title
+                    },
+                    new PropertyStructure() {
+                        name = "default_width",
+                        value = "240"
+                    },
+                    new PropertyStructure() {
+                        name = "default_height",
+                        value = "240"
+                    }
+                },
                 children = context.GetRenderedChildren()
             };
         }

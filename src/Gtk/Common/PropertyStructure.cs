@@ -9,21 +9,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
-using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace dnetreact
 {
-    public class PackingStructure {
-        /*
-            [XmlElement("expand")]
-            public Boolean expand { get; set; }
-            [XmlElement("fill")]
-            public Boolean fill { get; set; }
-            [XmlElement("position")]
-            public Int32 position { get; set; }
-            */
-        [XmlElement("property")]
-        public List<PropertyStructure> properties { get; set; }
+    public class PropertyStructure {
+            [XmlAttribute("name")]
+            public String name { get; set; }
+            [XmlText]
+            public String value { get; set; }
     }
 }

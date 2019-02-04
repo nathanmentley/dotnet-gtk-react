@@ -14,12 +14,13 @@ using System.Xml.Serialization;
 
 namespace dnetreact
 {
+    [XmlRoot("interface")]
     public class AppResult: BaseRenderable {
         public class Requires {
             [XmlAttribute("lib")]
-            public String lib { get { return "gtk+"; } }
+            public String lib { get { return "gtk+"; } set {} }
             [XmlAttribute("version")]
-            public String version { get { return "3.18"; } }
+            public String version { get { return "3.18"; } set{} }
         }
 
         [XmlElement("requires")]

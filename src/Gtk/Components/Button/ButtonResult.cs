@@ -9,6 +9,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace dnetreact
@@ -16,18 +17,12 @@ namespace dnetreact
     public class ButtonResult: BaseRenderable {
         public class ButtonResultObject {
             [XmlAttribute("class")]
-            public String className { get { return "GtkButton"; } }
+            public String className { get { return "GtkButton"; } set {} }
             [XmlAttribute("id")]
             public String id { get; set; }
 
-            [XmlElement("label")]
-            public String label { get; set; }
-            [XmlElement("visible")]
-            public Boolean visible { get; set; }
-            [XmlElement("can_focus")]
-            public Boolean canFocus { get; set; }
-            [XmlElement("receives_default")]
-            public Boolean receivesDefault { get; set; }
+            [XmlElement("property")]
+            public List<PropertyStructure> properties { get; set; }
         }
 
         [XmlElement("object")]

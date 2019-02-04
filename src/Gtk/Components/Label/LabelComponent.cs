@@ -9,6 +9,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace dnetreact
@@ -19,17 +20,41 @@ namespace dnetreact
         }
 
         public override LabelResult Render(ComponentContext<LabelResult, LabelState, LabelProps> context) {
+            Console.WriteLine("render label children: " + context.GetRenderedChildren().Count);
+
             return new LabelResult() {
                 LabelData = new LabelResult.LabelResultObject() {
                     id = "_label1",
-                    label = context.GetProps().label,
-                    visible = true,
-                    canFocus = true
+                    properties = new List<PropertyStructure>() {
+                        new PropertyStructure() {
+                            name = "label",
+                            value = context.GetProps().label
+                        },
+                        new PropertyStructure() {
+                            name = "visible",
+                            value = "True"
+                        },
+                        new PropertyStructure() {
+                            name = "can_focus",
+                            value = "True"
+                        }
+                    }
                 },
                 PackingDetails = new PackingStructure() {
-                    expand = true,
-                    fill = true,
-                    position = 0
+                    properties = new List<PropertyStructure>() {
+                        new PropertyStructure() {
+                            name = "expand",
+                            value = "True"
+                        },
+                        new PropertyStructure() {
+                            name = "fill",
+                            value = "True"
+                        },
+                        new PropertyStructure() {
+                            name = "position",
+                            value = "0"
+                        }
+                    }
                 }
             };
         }

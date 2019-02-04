@@ -19,11 +19,19 @@ namespace dnetreact
         {
             Console.WriteLine("Hello World!");
 
+            /*
+            <Window>
+                <Box>
+                    <Label />
+                    <Button />
+                </Box>
+            </Window>
+            */
             GtkAppRunner.Execute(
-                new WindowComponent(), new WindowProps(), new List<IComponentProcessor>() {
+                new WindowComponent(), new WindowProps() { title = "Ziggy" }, new List<IComponentProcessor>() {
                     new ComponentProcessor<BoxResult, BoxState, BoxProps>(new BoxComponent(), new BoxProps(), new List<IComponentProcessor>() {
-                            new ComponentProcessor<LabelResult, LabelState, LabelProps>(new LabelComponent(), new LabelProps()),
-                            new ComponentProcessor<ButtonResult, ButtonState, ButtonProps>(new ButtonComponent(), new ButtonProps())
+                            new ComponentProcessor<LabelResult, LabelState, LabelProps>(new LabelComponent(), new LabelProps() { label = "LC" }),
+                            new ComponentProcessor<ButtonResult, ButtonState, ButtonProps>(new ButtonComponent(), new ButtonProps() { label = "Spooky" })
                         }
                     )
                 }

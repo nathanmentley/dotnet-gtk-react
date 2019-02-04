@@ -17,22 +17,10 @@ namespace dnetreact
     public class BoxResult: BaseRenderable {
         public class BoxResultObject {
             [XmlAttribute("class")]
-            public String className { get { return "GtkBox"; } }
+            public String className { get { return "GtkBox"; } set {} }
 
-            [XmlElement("visible")]
-            public Boolean visible { get; set; }
-            [XmlElement("can_focus")]
-            public Boolean canFocus { get; set; }
-            [XmlElement("margin_left")]
-            public Int32 marginLeft { get; set; }
-            [XmlElement("margin_right")]
-            public Int32 marginRight { get; set; }
-            [XmlElement("margin_top")]
-            public Int32 marginTop { get; set; }
-            [XmlElement("margin_bottom")]
-            public Int32 marginBottom { get; set; }
-            [XmlElement("orientation")]
-            public String orientation { get; set; }
+            [XmlElement("property")]
+            public List<PropertyStructure> properties { get; set; }
 
             [XmlElement("child")]
             public List<BaseRenderable> children { get; set; }
