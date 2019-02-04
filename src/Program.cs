@@ -17,15 +17,13 @@ namespace dnetreact
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-
             /*
             If we had a jsx like preprocessor we could write this:
             GtkAppRunner.Execute(
                 <Window title="Ziggy">
                     <Box>
                         <Label label={this.localVariable} />
-                        <Button label="Spooky" onClick={this.callBack} />
+                        <Button label="Hello World Button" onClick={this.callBack} />
                     </Box>
                 </Window>
             );
@@ -33,10 +31,10 @@ namespace dnetreact
             Which is the ultimate goal. Tho, I'm not deadset on the xml format if something is still clean and easy to do.
             */
             GtkAppRunner.Execute(
-                new WindowComponent(), new WindowProps() { title = "Window Title" }, new List<IComponentProcessor>() {
+                new WindowComponent(), new WindowProps() { title = "DotNet React Window Title" }, new List<IComponentProcessor>() {
                     new ComponentProcessor<BoxResult, BoxState, BoxProps>(new BoxComponent(), new BoxProps(), new List<IComponentProcessor>() {
-                            new ComponentProcessor<LabelResult, LabelState, LabelProps>(new LabelComponent(), new LabelProps() { label = "Label text" }),
-                            new ComponentProcessor<ButtonResult, ButtonState, ButtonProps>(new ButtonComponent(), new ButtonProps() { label = "Button text" })
+                            new ComponentProcessor<LabelResult, LabelState, LabelProps>(new LabelComponent(), new LabelProps() { label = "Hello World" }),
+                            new ComponentProcessor<ButtonResult, ButtonState, ButtonProps>(new ButtonComponent(), new ButtonProps() { label = "Hello World Button" })
                         }
                     )
                 }
