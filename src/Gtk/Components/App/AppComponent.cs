@@ -24,8 +24,10 @@ namespace dnetreact
             private Builder builder;
 
             public static MainAppWindow Create(String glade) {
-                Builder builder = new Builder(glade.ToStream());
-                return new MainAppWindow(builder, builder.GetObject("MainWindow").Handle);
+                using(Stream stream = glade.ToStream()) {
+                    Builder builder = new Builder(stream);
+                    return new MainAppWindow(builder, builder.GetObject("MainWindow").Handle);
+                }
             }
 
             protected MainAppWindow(Builder _builder, IntPtr handle) : base(handle) {
@@ -34,83 +36,17 @@ namespace dnetreact
             }
         }
 
-
-/*
-<Window>
-    <Box>
-        <Label />
-        <Button />
-    </Box>
-</Window>
-        private String glade {
-            get {
-                return @"
-<?xml version='1.0' encoding='UTF-8'?>
-<interface>
-  <requires lib='gtk+' version='3.18'/>
-  <object class='GtkWindow' id='MainWindow'>
-    <property name='can_focus'>False</property>
-    <property name='title' translatable='yes'>Example Window</property>
-    <property name='default_width'>480</property>
-    <property name='default_height'>240</property>
-    <child>
-      <object class='GtkBox'>
-        <property name='visible'>True</property>
-        <property name='can_focus'>False</property>
-        <property name='margin_left'>4</property>
-        <property name='margin_right'>4</property>
-        <property name='margin_top'>4</property>
-        <property name='margin_bottom'>4</property>
-        <property name='orientation'>vertical</property>
-        <child>
-          <object class='GtkLabel' id='_label1'>
-            <property name='visible'>True</property>
-            <property name='can_focus'>False</property>
-            <property name='label' translatable='yes'>Hello World!</property>
-          </object>
-          <packing>
-            <property name='expand'>True</property>
-            <property name='fill'>True</property>
-            <property name='position'>0</property>
-          </packing>
-        </child>
-        <child>
-          <object class='GtkButton' id='_button1'>
-            <property name='label' translatable='yes'>Click me!</property>
-            <property name='visible'>True</property>
-            <property name='can_focus'>False</property>
-            <property name='receives_default'>True</property>
-          </object>
-          <packing>
-            <property name='expand'>False</property>
-            <property name='fill'>True</property>
-            <property name='position'>1</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-  </object>
-</interface>                   
-";
-            }
-        }
- */
-
         public override AppState GetInitialState(AppProps props) {
             return new AppState();
         }
 
         protected override AppResult _Render(ComponentContext<AppResult, AppState, AppProps> context) {
-            Console.WriteLine("render app children: " + context.GetRenderedChildren().Count);
-
             AppResult ret = new AppResult() {
                 requires = new AppResult.Requires(),
                 children = context.GetRenderedChildren()
             };
 
-            var glade = GenerateGlad(ret);
-            Console.WriteLine(glade);
-            var window = MainAppWindow.Create(glade);
+            var window = MainAppWindow.Create(GenerateGlad(ret));
             window.Show();
 
             return ret;
@@ -126,12 +62,16 @@ namespace dnetreact
             
             using(StringWriter sww = new UTF8StringWriter())
             {
-                using(XmlWriter writer = XmlWriter.Create(sww))
+                using(XmlWriter writer = XmlWriter.Create(sww, new XmlWriterSettings() {NamespaceHandling = NamespaceHandling.OmitDuplicates}))
                 {
                     XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
-                    ns.Add("","");
+                    ns.Add("", "");
                     xsSubmit.Serialize(writer, ret, ns);
                     String xml = sww.ToString(); // Your XML
+
+                    //A bit hacky. We need to drop the type and namespaces out of the result for glade.
+                    xml = Regex.Replace(xml, "p(\\d)+:type=\"(.*?)\"", "");
+                    xml = Regex.Replace(xml, "xmlns:p(\\d)+=\"(.*?)\"", "");
 
                     return xml;
                 }

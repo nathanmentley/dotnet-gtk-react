@@ -15,10 +15,15 @@ namespace dnetreact
 {
     public static class StringEx {
         public static Stream ToStream(this String str) {
+            //The consumer of this method should dispose this MemoryStream obj.
             MemoryStream stream = new MemoryStream();
             StreamWriter writer = new StreamWriter(stream);
+
+            //populate stream with string
             writer.Write(str);
             writer.Flush();
+
+            //reset it
             stream.Position = 0;
             return stream;
         }

@@ -19,8 +19,6 @@ namespace dnetreact
         }
 
         protected override WindowResult _Render(ComponentContext<WindowResult, WindowState, WindowProps> context) {
-            Console.WriteLine("render window children: " + context.GetRenderedChildren().Count);
-
             return new WindowResult(){
                 id = "MainWindow",
                 properties = new List<PropertyStructure>() {

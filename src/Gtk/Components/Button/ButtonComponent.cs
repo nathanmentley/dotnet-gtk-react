@@ -20,7 +20,6 @@ namespace dnetreact
         }
 
         protected override ButtonResult _Render(ComponentContext<ButtonResult, ButtonState, ButtonProps> context) {
-            Console.WriteLine("render button children: " + context.GetRenderedChildren().Count);
             return new ButtonResult() {
                 ButtonData = new ButtonResult.ButtonResultObject() {
                     id = "_button1",

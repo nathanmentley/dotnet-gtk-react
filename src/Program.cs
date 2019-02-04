@@ -33,10 +33,10 @@ namespace dnetreact
             Which is the ultimate goal. Tho, I'm not deadset on the xml format if something is still clean and easy to do.
             */
             GtkAppRunner.Execute(
-                new WindowComponent(), new WindowProps() { title = "Ziggy" }, new List<IComponentProcessor>() {
+                new WindowComponent(), new WindowProps() { title = "Window Title" }, new List<IComponentProcessor>() {
                     new ComponentProcessor<BoxResult, BoxState, BoxProps>(new BoxComponent(), new BoxProps(), new List<IComponentProcessor>() {
-                            new ComponentProcessor<LabelResult, LabelState, LabelProps>(new LabelComponent(), new LabelProps() { label = "LC" }),
-                            new ComponentProcessor<ButtonResult, ButtonState, ButtonProps>(new ButtonComponent(), new ButtonProps() { label = "Spooky" })
+                            new ComponentProcessor<LabelResult, LabelState, LabelProps>(new LabelComponent(), new LabelProps() { label = "Label text" }),
+                            new ComponentProcessor<ButtonResult, ButtonState, ButtonProps>(new ButtonComponent(), new ButtonProps() { label = "Button text" })
                         }
                     )
                 }

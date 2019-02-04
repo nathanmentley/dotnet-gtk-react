@@ -20,8 +20,6 @@ namespace dnetreact
         }
 
         protected override LabelResult _Render(ComponentContext<LabelResult, LabelState, LabelProps> context) {
-            Console.WriteLine("render label children: " + context.GetRenderedChildren().Count);
-
             return new LabelResult() {
                 LabelData = new LabelResult.LabelResultObject() {
                     id = "_label1",
