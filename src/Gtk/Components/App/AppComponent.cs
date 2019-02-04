@@ -10,6 +10,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 using System;
 using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Serialization;
@@ -99,7 +100,7 @@ namespace dnetreact
             return new AppState();
         }
 
-        public override AppResult Render(ComponentContext<AppResult, AppState, AppProps> context) {
+        protected override AppResult _Render(ComponentContext<AppResult, AppState, AppProps> context) {
             Console.WriteLine("render app children: " + context.GetRenderedChildren().Count);
 
             AppResult ret = new AppResult() {
@@ -109,7 +110,7 @@ namespace dnetreact
 
             var glade = GenerateGlad(ret);
             Console.WriteLine(glade);
-            var window = MainAppWindow.Create(GenerateGlad(ret));
+            var window = MainAppWindow.Create(glade);
             window.Show();
 
             return ret;
@@ -123,7 +124,7 @@ namespace dnetreact
                 typeof(WindowResult)
             });
             
-            using(StringWriter sww = new StringWriter())
+            using(StringWriter sww = new UTF8StringWriter())
             {
                 using(XmlWriter writer = XmlWriter.Create(sww))
                 {

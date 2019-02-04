@@ -20,12 +20,17 @@ namespace dnetreact
             Console.WriteLine("Hello World!");
 
             /*
-            <Window>
-                <Box>
-                    <Label />
-                    <Button />
-                </Box>
-            </Window>
+            If we had a jsx like preprocessor we could write this:
+            GtkAppRunner.Execute(
+                <Window title="Ziggy">
+                    <Box>
+                        <Label label={this.localVariable} />
+                        <Button label="Spooky" onClick={this.callBack} />
+                    </Box>
+                </Window>
+            );
+
+            Which is the ultimate goal. Tho, I'm not deadset on the xml format if something is still clean and easy to do.
             */
             GtkAppRunner.Execute(
                 new WindowComponent(), new WindowProps() { title = "Ziggy" }, new List<IComponentProcessor>() {

@@ -19,18 +19,8 @@ namespace dnetreact
             return new ButtonState();
         }
 
-        public override ButtonResult Render(ComponentContext<ButtonResult, ButtonState, ButtonProps> context) {
+        protected override ButtonResult _Render(ComponentContext<ButtonResult, ButtonState, ButtonProps> context) {
             Console.WriteLine("render button children: " + context.GetRenderedChildren().Count);
-/*
-            [XmlElement("label")]
-            public String label { get; set; }
-            [XmlElement("visible")]
-            public Boolean visible { get; set; }
-            [XmlElement("can_focus")]
-            public Boolean canFocus { get; set; }
-            [XmlElement("receives_default")]
-            public Boolean receivesDefault { get; set; }*/
-
             return new ButtonResult() {
                 ButtonData = new ButtonResult.ButtonResultObject() {
                     id = "_button1",

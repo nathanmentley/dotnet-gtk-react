@@ -18,7 +18,7 @@ namespace dnetreact
             return new WindowState();
         }
 
-        public override WindowResult Render(ComponentContext<WindowResult, WindowState, WindowProps> context) {
+        protected override WindowResult _Render(ComponentContext<WindowResult, WindowState, WindowProps> context) {
             Console.WriteLine("render window children: " + context.GetRenderedChildren().Count);
 
             return new WindowResult(){

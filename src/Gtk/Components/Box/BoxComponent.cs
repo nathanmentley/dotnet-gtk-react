@@ -19,7 +19,7 @@ namespace dnetreact
             return new BoxState();
         }
 
-        public override BoxResult Render(ComponentContext<BoxResult, BoxState, BoxProps> context) {
+        protected override BoxResult _Render(ComponentContext<BoxResult, BoxState, BoxProps> context) {
             Console.WriteLine("render box children: " + context.GetRenderedChildren().Count);
 
             return new BoxResult() {

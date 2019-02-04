@@ -20,15 +20,19 @@ namespace dnetreact
         private bool disposed = false;
 
         public abstract StateType GetInitialState(PropsType props);
-        public abstract RenderableType Render(ComponentContext<RenderableType, StateType, PropsType> context);
+        protected abstract RenderableType _Render(ComponentContext<RenderableType, StateType, PropsType> context);
         
-        public Boolean ShouldUpdate(ComponentContext<RenderableType, StateType, PropsType> context) {
+        public virtual Boolean ShouldUpdate(ComponentContext<RenderableType, StateType, PropsType> context) {
             return true;
         }
-        public void DidMount(ComponentContext<RenderableType, StateType, PropsType> context) {}
-        public void WillRender(ComponentContext<RenderableType, StateType, PropsType> context) {}
-        public void DidRender(ComponentContext<RenderableType, StateType, PropsType> context) {}
-        public void WillUnmount(ComponentContext<RenderableType, StateType, PropsType> context) {}
+        public virtual void DidMount(ComponentContext<RenderableType, StateType, PropsType> context) {}
+        public virtual void WillRender(ComponentContext<RenderableType, StateType, PropsType> context) {}
+        public virtual void DidRender(ComponentContext<RenderableType, StateType, PropsType> context) {}
+        public virtual void WillUnmount(ComponentContext<RenderableType, StateType, PropsType> context) {}
+
+        public RenderableType Render(ComponentContext<RenderableType, StateType, PropsType> context) {
+            return this._Render(context);
+        }
 
         protected virtual void _Dispose() {
         }

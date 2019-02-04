@@ -19,7 +19,7 @@ namespace dnetreact
             return new LabelState();
         }
 
-        public override LabelResult Render(ComponentContext<LabelResult, LabelState, LabelProps> context) {
+        protected override LabelResult _Render(ComponentContext<LabelResult, LabelState, LabelProps> context) {
             Console.WriteLine("render label children: " + context.GetRenderedChildren().Count);
 
             return new LabelResult() {
