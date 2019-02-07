@@ -15,15 +15,26 @@ using Gtk;
 namespace dnetreact
 {
     public class GtkWidgetToolkit: IWidgetToolkit {
+        public static void Quit() {
+            finished = true;
+        }
+        private static Boolean finished { get; set; }
+
         public void Init() {
+            finished = false;
             Application.Init();
         }
 
-        public void Start() {
-            Application.Run();
+        public void Step() {
+            Application.RunIteration(false);
+        }
+
+        public Boolean DidFinish() {
+            return finished;
         }
 
         public void Deinit() {
+            Application.Quit();
         }
     }
 }

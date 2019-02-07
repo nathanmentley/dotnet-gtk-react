@@ -34,6 +34,14 @@ namespace dnetreact
             context = new ComponentContext<RenderableType, StateType, PropsType>(_component, props, children, this);
         }
 
+        public void BindElements() {
+            component.BindElements(context);
+
+            foreach(IComponentProcessor child in context.GetChildren()) {
+                child.BindElements();
+            }
+        }
+
         public BaseRenderable ForceUpdate() {
             return _Render();
         }

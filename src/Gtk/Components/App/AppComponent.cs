@@ -19,22 +19,8 @@ using Gtk;
 
 namespace dnetreact
 {
-    public class AppComponent: Component<AppResult, AppState, AppProps>{
-        public class MainAppWindow: Window {
-            private Builder builder;
-
-            public static MainAppWindow Create(String glade) {
-                using(Stream stream = glade.ToStream()) {
-                    Builder builder = new Builder(stream);
-                    return new MainAppWindow(builder, builder.GetObject("MainWindow").Handle);
-                }
-            }
-
-            protected MainAppWindow(Builder _builder, IntPtr handle) : base(handle) {
-                builder = _builder;
-                builder.Autoconnect(this);
-            }
-        }
+    public class AppComponent: Component<AppResult, AppState, AppProps>, MGtkComponent{
+        private Window window { get; set; }
 
         public override AppState GetInitialState(AppProps props) {
             return new AppState();
@@ -46,10 +32,23 @@ namespace dnetreact
                 children = context.GetRenderedChildren()
             };
 
-            var window = MainAppWindow.Create(GenerateGlad(ret));
-            window.Show();
+            var win = MainGtkApp.Create(GenerateGlad(ret), "MainWindow");
+            win.Show();
 
             return ret;
+        }
+
+
+        protected override void _BindElements(ComponentContext<AppResult, AppState, AppProps> context) {
+            if(window == null) {
+                window = this.GetGtkElement<Window>("MainWindow");
+                window.DeleteEvent += OnClose;
+            }
+        }
+
+        private void OnClose(object sender, DeleteEventArgs a)
+        {
+            GtkWidgetToolkit.Quit();
         }
 
         private String GenerateGlad(AppResult ret) {
@@ -70,6 +69,7 @@ namespace dnetreact
                     String xml = sww.ToString(); // Your XML
 
                     //A bit hacky. We need to drop the type and namespaces out of the result for glade.
+                    // TODO: Look for a while to do xml generation without adding a bunch of these attributes
                     xml = Regex.Replace(xml, "p(\\d)+:type=\"(.*?)\"", "");
                     xml = Regex.Replace(xml, "xmlns:p(\\d)+=\"(.*?)\"", "");
 

@@ -22,10 +22,15 @@ namespace dnetreact
             toolkit.Init();
 
             using(var processor = new ComponentProcessor<RenderableType, StateType, PropsType>(component, props, children)) {
-                processor.ForceUpdate();
+                while(!toolkit.DidFinish()) {
+                    processor.ForceUpdate();
+                    
+                    toolkit.Step();
 
-                toolkit.Start();
+                    processor.BindElements();
+                }
             }
+            Console.WriteLine("exiting");
 
             toolkit.Deinit();
         }

@@ -14,7 +14,7 @@ using System.Xml.Serialization;
 
 namespace dnetreact
 {
-    public class BoxComponent: Component<BoxResult, BoxState, BoxProps>{
+    public class BoxComponent: Component<BoxResult, BoxState, BoxProps>, MGtkComponent{
         public override BoxState GetInitialState(BoxProps props) {
             return new BoxState();
         }

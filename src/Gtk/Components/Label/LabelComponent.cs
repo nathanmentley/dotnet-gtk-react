@@ -14,7 +14,7 @@ using System.Xml.Serialization;
 
 namespace dnetreact
 {
-    public class LabelComponent: Component<LabelResult, LabelState, LabelProps>{
+    public class LabelComponent: Component<LabelResult, LabelState, LabelProps>, MGtkComponent{
         public override LabelState GetInitialState(LabelProps props) {
             return new LabelState();
         }

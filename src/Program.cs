@@ -34,7 +34,12 @@ namespace dnetreact
                 new WindowComponent(), new WindowProps() { title = "DotNet React Window Title" }, new List<IComponentProcessor>() {
                     new ComponentProcessor<BoxResult, BoxState, BoxProps>(new BoxComponent(), new BoxProps(), new List<IComponentProcessor>() {
                             new ComponentProcessor<LabelResult, LabelState, LabelProps>(new LabelComponent(), new LabelProps() { label = "Hello World" }),
-                            new ComponentProcessor<ButtonResult, ButtonState, ButtonProps>(new ButtonComponent(), new ButtonProps() { label = "Hello World Button" })
+                            new ComponentProcessor<ButtonResult, ButtonState, ButtonProps>(new ButtonComponent(), new ButtonProps() {
+                                label = "Hello World Button",
+                                OnClick = () => {
+                                    Console.WriteLine("Does this work?");
+                                }
+                            })
                         }
                     )
                 }

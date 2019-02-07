@@ -14,5 +14,6 @@ namespace dnetreact
 {
     public interface IComponentProcessor: IDisposable {
         BaseRenderable ForceUpdate();
+        void BindElements();
     }
 }

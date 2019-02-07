@@ -13,7 +13,7 @@ using System.Collections.Generic;
 
 namespace dnetreact
 {
-    public class WindowComponent: Component<WindowResult, WindowState, WindowProps>{
+    public class WindowComponent: Component<WindowResult, WindowState, WindowProps>, MGtkComponent{
         public override WindowState GetInitialState(WindowProps props) {
             return new WindowState();
         }

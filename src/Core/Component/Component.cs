@@ -17,12 +17,15 @@ namespace dnetreact
         where StateType: BaseState
         where PropsType: BaseProps
     {
+        //data
         private bool disposed = false;
 
+        //Overridables
         public abstract StateType GetInitialState(PropsType props);
         protected abstract RenderableType _Render(ComponentContext<RenderableType, StateType, PropsType> context);
         
         public virtual Boolean ShouldUpdate(ComponentContext<RenderableType, StateType, PropsType> context) {
+            //TODO: Only return true if we see prop or state changes.
             return true;
         }
         public virtual void DidMount(ComponentContext<RenderableType, StateType, PropsType> context) {}
@@ -30,11 +33,17 @@ namespace dnetreact
         public virtual void DidRender(ComponentContext<RenderableType, StateType, PropsType> context) {}
         public virtual void WillUnmount(ComponentContext<RenderableType, StateType, PropsType> context) {}
 
+        protected virtual void _BindElements(ComponentContext<RenderableType, StateType, PropsType> context) {}
+        
+        protected virtual void _Dispose() {}
+
+        //Sealed
         public RenderableType Render(ComponentContext<RenderableType, StateType, PropsType> context) {
             return this._Render(context);
         }
 
-        protected virtual void _Dispose() {
+        public void BindElements(ComponentContext<RenderableType, StateType, PropsType> context) {
+            this._BindElements(context);
         }
 
         public void Dispose() {

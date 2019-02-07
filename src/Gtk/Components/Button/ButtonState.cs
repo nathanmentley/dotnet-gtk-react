@@ -13,6 +13,7 @@ using System;
 namespace dnetreact
 {
     public class ButtonState: BaseState {
+        public Int32 clicks { get; set; }
         public ButtonState() {}
     }
 }

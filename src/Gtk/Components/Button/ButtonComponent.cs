@@ -12,11 +12,17 @@ using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
+using Gtk;
+
 namespace dnetreact
 {
-    public class ButtonComponent: Component<ButtonResult, ButtonState, ButtonProps>{
+    public class ButtonComponent: Component<ButtonResult, ButtonState, ButtonProps>, MGtkComponent {
+        private Button button { get; set; }
+
         public override ButtonState GetInitialState(ButtonProps props) {
-            return new ButtonState();
+            return new ButtonState() {
+                clicks = 0
+            };
         }
 
         protected override ButtonResult _Render(ComponentContext<ButtonResult, ButtonState, ButtonProps> context) {
@@ -26,7 +32,7 @@ namespace dnetreact
                     properties = new List<PropertyStructure>() {
                         new PropertyStructure() {
                             name = "label",
-                            value = context.GetProps().label
+                            value = context.GetProps().label + " clicks: " + context.GetState().clicks
                         },
                         new PropertyStructure() {
                             name = "visible",
@@ -59,6 +65,13 @@ namespace dnetreact
                     }
                 }
             };
+        }
+
+        protected override void _BindElements(ComponentContext<ButtonResult, ButtonState, ButtonProps> context) {
+            if(button == null) {
+                button = this.GetGtkElement<Button>("_button1");
+                button.Clicked += (object sender, EventArgs a) => OnClick(context);
+            }
         }
 
         private void OnClick(ComponentContext<ButtonResult, ButtonState, ButtonProps> context) {

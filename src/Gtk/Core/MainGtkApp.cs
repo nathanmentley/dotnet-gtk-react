@@ -9,13 +9,37 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
+using System.IO;
+
+using Gtk;
 
 namespace dnetreact
 {
-    public interface IWidgetToolkit {
-        void Init();
-        void Step();
-        Boolean DidFinish();
-        void Deinit();
+    public class MainGtkApp: Window {
+        private static MainGtkApp _instance { get; set; }
+
+        public static MainGtkApp Get() {
+            return _instance;
+        }
+
+        public static MainGtkApp Create(String glade, String windowId) {
+            if(_instance == null) {
+                using(Stream stream = glade.ToStream()) {
+                    Builder builder = new Builder(stream);
+
+                    _instance = new MainGtkApp(builder, builder.GetObject(windowId).Handle);
+                }
+            } else {
+                _instance.builder.AddFromString(glade);
+            }
+
+            return _instance;
+        }
+        public Builder builder { get; private set; }
+
+        protected MainGtkApp(Builder _builder, IntPtr handle) : base(handle) {
+            builder = _builder;
+            //builder.Autoconnect(this);
+        }
     }
 }

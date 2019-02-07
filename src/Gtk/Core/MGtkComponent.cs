@@ -9,13 +9,18 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
+using System.IO;
+using System.Text;
 
 namespace dnetreact
 {
-    public interface IWidgetToolkit {
-        void Init();
-        void Step();
-        Boolean DidFinish();
-        void Deinit();
+    public interface MGtkComponent {}
+
+    public static class MGtkComponentEx {
+        public static T GetGtkElement<T>(this MGtkComponent component, String id)
+        where T: GLib.Object {
+            return (T)MainGtkApp.Get().builder.GetObject(id);
+        }
     }
 }
+
