@@ -17,7 +17,15 @@ namespace dnetreact
     public class WindowComponent: PureComponent<WindowProps>, MGtkComponent<Window, WindowProps> {
         public Window widget { get; private set; }
 
+        protected override void DidMount(WindowProps props) {
+            BindEvents(props);
+
+            widget = new Window(WindowType.Toplevel);
+        }
+
         protected override RenderResult _Render(WindowProps props) {
+            Console.WriteLine("Window.");
+            widget.Title = props?.Title;
             return null;
         }
 

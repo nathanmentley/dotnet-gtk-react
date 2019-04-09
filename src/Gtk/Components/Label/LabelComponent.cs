@@ -17,7 +17,16 @@ namespace dnetreact
     public class LabelComponent: PureComponent<LabelProps>, MGtkComponent<Label, LabelProps> {
         public Label widget { get; private set; }
 
+        protected override void DidMount(LabelProps props) {
+            BindEvents(props);
+
+            widget = new Label();
+        }
+
         protected override RenderResult _Render(LabelProps props) {
+            Console.WriteLine("Label.");
+            widget.Text = props?.Label;
+
             return null;
         }
 

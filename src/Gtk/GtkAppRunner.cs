@@ -14,6 +14,8 @@ using System.Collections.Generic;
 namespace dnetreact
 {
     public class GtkAppRunner: AppRunner {
+        private static GtkAppRunner _instance { get; set; }
+
         public static void Execute<StateType, PropsType>(
             Component<StateType, PropsType> component,
             Props props,
@@ -22,12 +24,15 @@ namespace dnetreact
             where StateType: BaseState
             where PropsType: BaseProps
         {
-            GtkAppRunner runner = new GtkAppRunner();
-
-            runner.Run(component, props, children);
+            if(_instance == null) {
+                _instance = new GtkAppRunner();
+                _instance.Run(component, props, children);
+            } else {
+                //throw exception
+            }
         }
 
-        protected void Run<StateType, PropsType>(
+        private void Run<StateType, PropsType>(
             Component<StateType, PropsType> component,
             Props props,
             IList<IComponentProcessor> children = null

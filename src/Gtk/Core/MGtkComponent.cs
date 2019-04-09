@@ -23,12 +23,12 @@ namespace dnetreact
     }
 
     internal static class MGtkComponentEx {
-        public static GTKWidgetType GetWidget<GTKWidgetType, PropsType>(
+        internal static void MountChildren<GTKWidgetType, PropsType>(
             this MGtkComponent<GTKWidgetType, PropsType> component
         )
         where GTKWidgetType: Widget
         where PropsType: BaseProps {
-            return component.widget;
+
         }
     }
 }

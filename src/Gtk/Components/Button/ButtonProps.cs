@@ -13,10 +13,7 @@ using System;
 namespace dnetreact
 {
     public class ButtonProps: BaseProps {
-        //public String id { get; set; }
         public String Label { get; set; }
-        //public Boolean visible { get; set; }
-        //public Boolean canFocus { get; set; }
 
         public Action OnClick { get; set; }
     }

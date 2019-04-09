@@ -18,6 +18,7 @@ namespace dnetreact
         }
 
         protected override RenderResult _Render(ComponentContext<EmptyState, AppProps> context) {
+            Console.WriteLine("App.");
             return null;
         }
     }

@@ -17,17 +17,23 @@ namespace dnetreact
     public class ButtonComponent: PureComponent<ButtonProps>, MGtkComponent<Button, ButtonProps> {
         public Button widget { get; private set; }
 
+        protected override void DidMount(ButtonProps props) {
+            BindEvents(props);
+
+            widget = new Button();
+        }
+
         protected override RenderResult _Render(ButtonProps props) {
-            Console.WriteLine("asdf asdf asdf asdf.");
+            Console.WriteLine("Button.");
+            widget.Label = props?.Label;
             return null;
         }
-/*
-        protected override void _BindElements(ButtonProps props) {
+
+        public void BindEvents(ButtonProps props) {
             if (widget != null) {
                 widget.Clicked += (object sender, EventArgs a) => OnClick(props);
             }
-        }*/
-        public void BindEvents(ButtonProps props) {}
+        }
 
         private void OnClick(ButtonProps props) {
             if(props?.OnClick != null) {

@@ -15,14 +15,21 @@ using Gtk;
 namespace dnetreact
 {
     abstract public class BoxComponent<BoxType>: Component<EmptyState, BoxProps>, MGtkComponent<BoxType, BoxProps>
-    where BoxType: Box {
+    where BoxType: Box, new() {
         public BoxType widget { get; private set; }
 
         public override EmptyState GetInitialState(BoxProps props) {
             return new EmptyState();
         }
 
+        public override void DidMount(ComponentContext<EmptyState, BoxProps> context) {
+            BindEvents(context.GetProps());
+
+            widget = new BoxType();
+        }
+
         protected override RenderResult _Render(ComponentContext<EmptyState, BoxProps> context) {
+            Console.WriteLine("Box.");
             return null;
         }
 
@@ -32,6 +39,4 @@ namespace dnetreact
     public class HBoxComponent: BoxComponent<HBox> {}
     
     public class VBoxComponent: BoxComponent<VBox> {}
-    
-    public class ButtonBoxComponent: BoxComponent<ButtonBox> {}
 }

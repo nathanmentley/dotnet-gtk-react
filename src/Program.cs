@@ -20,11 +20,11 @@ namespace dnetreact
             /*
             If we had a jsx like preprocessor we could write this:
             GtkAppRunner.Execute(
-                <Window title="Ziggy">
-                    <Box>
-                        <Label label={this.localVariable} />
-                        <Button label="Hello World Button" onClick={this.callBack} />
-                    </Box>
+                <Window Title="Ziggy">
+                    <HBox>
+                        <Label Label={this.localVariable} />
+                        <Button Label="Hello World Button" OnClick={this.callBack} />
+                    </HBox>
                 </Window>
             );
 
