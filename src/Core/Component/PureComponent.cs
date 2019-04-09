@@ -40,9 +40,6 @@ namespace dnetreact
         public override sealed void WillUnmount(ComponentContext<EmptyState, PropsType> context) {
             WillUnmount(context.GetProps());
         }
-        protected override sealed void _BindElements(ComponentContext<EmptyState, PropsType> context) {
-            _BindElements(context.GetProps());
-        }
 
         protected abstract RenderResult _Render(PropsType props);
 
@@ -50,6 +47,5 @@ namespace dnetreact
         protected virtual void WillRender(PropsType props) {}
         protected virtual void DidRender(PropsType props) {}
         protected virtual void WillUnmount(PropsType props) {}
-        protected virtual void _BindElements(PropsType props) {}
     }
 }

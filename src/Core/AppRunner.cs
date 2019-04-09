@@ -30,8 +30,6 @@ namespace dnetreact
                     processor.ForceUpdate();
                     
                     toolkit.Step();
-
-                    processor.BindElements();
                 }
             }
             Console.WriteLine("exiting");

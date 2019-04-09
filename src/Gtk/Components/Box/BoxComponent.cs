@@ -14,16 +14,24 @@ using Gtk;
 
 namespace dnetreact
 {
-    public class BoxComponent: Component<BoxState, BoxProps>, MGtkComponent<Container>{
-        public Container widget { get; private set; }
+    abstract public class BoxComponent<BoxType>: Component<EmptyState, BoxProps>, MGtkComponent<BoxType, BoxProps>
+    where BoxType: Box {
+        public BoxType widget { get; private set; }
 
-        public override BoxState GetInitialState(BoxProps props) {
-            return new BoxState();
+        public override EmptyState GetInitialState(BoxProps props) {
+            return new EmptyState();
         }
 
-        protected override RenderResult _Render(ComponentContext<BoxState, BoxProps> context) {
+        protected override RenderResult _Render(ComponentContext<EmptyState, BoxProps> context) {
             return null;
         }
-    }
-}
 
+        public void BindEvents(BoxProps props) {}
+    }
+
+    public class HBoxComponent: BoxComponent<HBox> {}
+    
+    public class VBoxComponent: BoxComponent<VBox> {}
+    
+    public class ButtonBoxComponent: BoxComponent<ButtonBox> {}
+}

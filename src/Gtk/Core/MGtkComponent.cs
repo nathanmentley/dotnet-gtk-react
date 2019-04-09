@@ -14,14 +14,20 @@ using Gtk;
 
 namespace dnetreact
 {
-    internal interface MGtkComponent<T> 
-    where T: Widget {
-        T widget { get; }
+    internal interface MGtkComponent<GTKWidgetType, PropsType> 
+    where GTKWidgetType: Widget
+    where PropsType: BaseProps {
+        GTKWidgetType widget { get; }
+
+        void BindEvents(PropsType props);
     }
 
     internal static class MGtkComponentEx {
-        public static T GetWidget<T>(this MGtkComponent<T> component)
-        where T: Widget {
+        public static GTKWidgetType GetWidget<GTKWidgetType, PropsType>(
+            this MGtkComponent<GTKWidgetType, PropsType> component
+        )
+        where GTKWidgetType: Widget
+        where PropsType: BaseProps {
             return component.widget;
         }
     }

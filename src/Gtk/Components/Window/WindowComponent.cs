@@ -14,11 +14,13 @@ using Gtk;
 
 namespace dnetreact
 {
-    public class WindowComponent: PureComponent<WindowProps>, MGtkComponent<Window>{
+    public class WindowComponent: PureComponent<WindowProps>, MGtkComponent<Window, WindowProps> {
         public Window widget { get; private set; }
 
         protected override RenderResult _Render(WindowProps props) {
             return null;
         }
+
+        public void BindEvents(WindowProps props) {}
     }
 }

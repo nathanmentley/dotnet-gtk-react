@@ -31,18 +31,12 @@ namespace dnetreact
         public virtual void WillRender(ComponentContext<StateType, PropsType> context) {}
         public virtual void DidRender(ComponentContext<StateType, PropsType> context) {}
         public virtual void WillUnmount(ComponentContext<StateType, PropsType> context) {}
-
-        protected virtual void _BindElements(ComponentContext<StateType, PropsType> context) {}
         
         protected virtual void _Dispose() {}
 
         //Sealed
         public RenderResult Render(ComponentContext<StateType, PropsType> context) {
             return this._Render(context);
-        }
-
-        public void BindElements(ComponentContext<StateType, PropsType> context) {
-            this._BindElements(context);
         }
 
         public void Dispose() {

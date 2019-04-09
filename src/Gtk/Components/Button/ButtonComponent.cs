@@ -14,18 +14,20 @@ using Gtk;
 
 namespace dnetreact
 {
-    public class ButtonComponent: PureComponent<ButtonProps>, MGtkComponent<Button> {
+    public class ButtonComponent: PureComponent<ButtonProps>, MGtkComponent<Button, ButtonProps> {
         public Button widget { get; private set; }
 
         protected override RenderResult _Render(ButtonProps props) {
+            Console.WriteLine("asdf asdf asdf asdf.");
             return null;
         }
-
+/*
         protected override void _BindElements(ButtonProps props) {
             if (widget != null) {
                 widget.Clicked += (object sender, EventArgs a) => OnClick(props);
             }
-        }
+        }*/
+        public void BindEvents(ButtonProps props) {}
 
         private void OnClick(ButtonProps props) {
             if(props?.OnClick != null) {

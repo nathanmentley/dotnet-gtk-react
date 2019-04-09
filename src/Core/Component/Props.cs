@@ -19,9 +19,13 @@ namespace dnetreact
         internal PropsType BuildProps<PropsType>()
         where PropsType: BaseProps
         {
-            return JsonConvert.DeserializeObject<PropsType>(
-                JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented)
-            );
+            try {
+                return JsonConvert.DeserializeObject<PropsType>(
+                    JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented)
+                );
+            } catch(JsonSerializationException) {
+                return null;
+            }
         }
     }
 }

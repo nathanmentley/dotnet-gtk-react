@@ -14,7 +14,7 @@ namespace dnetreact
 {
     public class WindowProps: BaseProps {
         //public String id { get; set; }
-        public String title { get; set; }
+        public String Title { get; set; }
         //public Boolean canFocus { get; set; }
     }
 }

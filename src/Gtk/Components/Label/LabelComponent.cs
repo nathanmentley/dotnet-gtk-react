@@ -14,12 +14,14 @@ using Gtk;
 
 namespace dnetreact
 {
-    public class LabelComponent: PureComponent<LabelProps>, MGtkComponent<Label>{
+    public class LabelComponent: PureComponent<LabelProps>, MGtkComponent<Label, LabelProps> {
         public Label widget { get; private set; }
 
         protected override RenderResult _Render(LabelProps props) {
             return null;
         }
+
+        public void BindEvents(LabelProps props) {}
     }
 }
 

@@ -31,15 +31,23 @@ namespace dnetreact
             Which is the ultimate goal. Tho, I'm not deadset on the xml format if something is still clean and easy to do.
             */
             GtkAppRunner.Execute(
-                new WindowComponent(), new Props() {{"title", "DotNet React Window Title"}}, new List<IComponentProcessor>() {
-                    new ComponentProcessor<BoxState, BoxProps>(new BoxComponent(), new Props(), new List<IComponentProcessor>() {
-                        new ComponentProcessor<EmptyState, LabelProps>(new LabelComponent(), new Props{{"label", "Hello World"}}),
+                new WindowComponent(), new Props() {
+                        {
+                            "Title", "DotNet React Window Title"
+                        }
+                    }, new List<IComponentProcessor>() {
+                    new ComponentProcessor<EmptyState, BoxProps>(new HBoxComponent(), new Props(), new List<IComponentProcessor>() {
+                        new ComponentProcessor<EmptyState, LabelProps>(new LabelComponent(), new Props{
+                            {
+                                "Label", "Hello World"
+                            }
+                        }),
                         new ComponentProcessor<EmptyState, ButtonProps>(new ButtonComponent(), new Props{
                             {
-                                "label", "Hello World Button"
+                                "Label", "Hello World Button"
                             },
                             {
-                                "OnClick", "adsf"
+                                "OnClick", (Action)(() => { Console.WriteLine("Button Click"); })
                             }
                         })
                     })

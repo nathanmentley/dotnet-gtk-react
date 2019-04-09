@@ -12,25 +12,13 @@ using System;
 
 namespace dnetreact
 {
-    public class AppComponent: Component<AppState, AppProps>{
-        public override AppState GetInitialState(AppProps props) {
-            return new AppState();
+    public class AppComponent: Component<EmptyState, AppProps>{
+        public override EmptyState GetInitialState(AppProps props) {
+            return new EmptyState();
         }
 
-        protected override RenderResult _Render(ComponentContext<AppState, AppProps> context) {
+        protected override RenderResult _Render(ComponentContext<EmptyState, AppProps> context) {
             return null;
         }
-
-        protected override void _BindElements(ComponentContext<AppState, AppProps> context) {
-            /*if (widget != null) {
-                widget.DeleteEvent += OnClose;
-            }*/
-        }
-/*
-        private void OnClose(object sender, DeleteEventArgs a)
-        {
-            GtkWidgetToolkit.Quit();
-        }
-*/
     }
 }
