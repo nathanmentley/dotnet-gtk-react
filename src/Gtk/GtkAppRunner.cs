@@ -14,12 +14,11 @@ using System.Collections.Generic;
 namespace dnetreact
 {
     public class GtkAppRunner: AppRunner {
-        public static void Execute<RenderableType, StateType, PropsType>(
-            Component<RenderableType, StateType, PropsType> component,
-            PropsType props,
+        public static void Execute<StateType, PropsType>(
+            Component<StateType, PropsType> component,
+            Props props,
             IList<IComponentProcessor> children = null
         )
-            where RenderableType: BaseRenderable
             where StateType: BaseState
             where PropsType: BaseProps
         {
@@ -28,21 +27,20 @@ namespace dnetreact
             runner.Run(component, props, children);
         }
 
-        protected void Run<RenderableType, StateType, PropsType>(
-            Component<RenderableType, StateType, PropsType> component,
-            PropsType props,
+        protected void Run<StateType, PropsType>(
+            Component<StateType, PropsType> component,
+            Props props,
             IList<IComponentProcessor> children = null
         )
-            where RenderableType: BaseRenderable
             where StateType: BaseState
             where PropsType: BaseProps
         {
             _Run(
                 new GtkWidgetToolkit(),
                 new AppComponent(),
-                new AppProps(),
+                new Props(),
                 new List<IComponentProcessor>() {
-                    new ComponentProcessor<RenderableType, StateType, PropsType>(
+                    new ComponentProcessor<StateType, PropsType>(
                         component,
                         props,
                         children

@@ -9,38 +9,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
-using System.Collections.Generic;
+
+using Gtk;
 
 namespace dnetreact
 {
-    public class WindowComponent: Component<WindowResult, WindowState, WindowProps>, MGtkComponent{
-        public override WindowState GetInitialState(WindowProps props) {
-            return new WindowState();
-        }
+    public class WindowComponent: PureComponent<WindowProps>, MGtkComponent<Window>{
+        public Window widget { get; private set; }
 
-        protected override WindowResult _Render(ComponentContext<WindowResult, WindowState, WindowProps> context) {
-            return new WindowResult(){
-                id = "MainWindow",
-                properties = new List<PropertyStructure>() {
-                    new PropertyStructure() {
-                        name = "can_focus",
-                        value = "false"
-                    },
-                    new PropertyStructure() {
-                        name = "title",
-                        value = context.GetProps().title
-                    },
-                    new PropertyStructure() {
-                        name = "default_width",
-                        value = "240"
-                    },
-                    new PropertyStructure() {
-                        name = "default_height",
-                        value = "240"
-                    }
-                },
-                children = context.GetRenderedChildren()
-            };
+        protected override RenderResult _Render(WindowProps props) {
+            return null;
         }
     }
 }

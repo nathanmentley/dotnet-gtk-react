@@ -14,14 +14,18 @@ using System.Collections.Generic;
 namespace dnetreact
 {
     public class AppRunner {
-        protected void _Run<RenderableType, StateType, PropsType>(IWidgetToolkit toolkit, Component<RenderableType, StateType, PropsType> component, PropsType props, IList<IComponentProcessor> children)
-            where RenderableType: BaseRenderable
+        protected void _Run<StateType, PropsType>(
+            IWidgetToolkit toolkit,
+            Component<StateType, PropsType> component,
+            Props props,
+            IList<IComponentProcessor> children
+        )
             where StateType: BaseState
             where PropsType: BaseProps
         {
             toolkit.Init();
 
-            using(var processor = new ComponentProcessor<RenderableType, StateType, PropsType>(component, props, children)) {
+            using(var processor = new ComponentProcessor<StateType, PropsType>(component, props, children)) {
                 while(!toolkit.DidFinish()) {
                     processor.ForceUpdate();
                     

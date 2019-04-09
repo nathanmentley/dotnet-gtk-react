@@ -9,8 +9,19 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
+using System.Collections.Generic;
+
+using Newtonsoft.Json;
 
 namespace dnetreact
 {
-    public class WindowState: BaseState {}
+    public class Props: Dictionary<String, Object> {
+        internal PropsType BuildProps<PropsType>()
+        where PropsType: BaseProps
+        {
+            return JsonConvert.DeserializeObject<PropsType>(
+                JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented)
+            );
+        }
+    }
 }

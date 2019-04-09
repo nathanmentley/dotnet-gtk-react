@@ -14,8 +14,7 @@ using System.Linq;
 
 namespace dnetreact
 {
-    public class ComponentContext<RenderableType, StateType, PropsType>: IDisposable
-        where RenderableType: BaseRenderable
+    public class ComponentContext<StateType, PropsType>: IDisposable
         where StateType: BaseState
         where PropsType: BaseProps
     {
@@ -27,12 +26,12 @@ namespace dnetreact
         private IComponentEventDelegate handler;
 
         public ComponentContext(
-                Component<RenderableType, StateType, PropsType> component,
-                PropsType _props,
+                Component<StateType, PropsType> component,
+                Props _props,
                 IList<IComponentProcessor> _children,
                 IComponentEventDelegate _handler
         ) {
-            props = _props;
+            props = _props.BuildProps<PropsType>();
             children = _children;
             handler = _handler;
             state = component.GetInitialState(props);
@@ -46,7 +45,7 @@ namespace dnetreact
             return children;
         }
 
-        public List<BaseRenderable> GetRenderedChildren() {
+        public List<RenderResult> GetRenderedChildren() {
             return GetChildren().Select(x => x.ForceUpdate()).Where(x => x != null).ToList();
         }
 

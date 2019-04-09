@@ -9,52 +9,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
-using System.Collections.Generic;
-using System.Xml.Serialization;
+
+using Gtk;
 
 namespace dnetreact
 {
-    public class LabelComponent: Component<LabelResult, LabelState, LabelProps>, MGtkComponent{
-        public override LabelState GetInitialState(LabelProps props) {
-            return new LabelState();
-        }
+    public class LabelComponent: PureComponent<LabelProps>, MGtkComponent<Label>{
+        public Label widget { get; private set; }
 
-        protected override LabelResult _Render(ComponentContext<LabelResult, LabelState, LabelProps> context) {
-            return new LabelResult() {
-                LabelData = new LabelResult.LabelResultObject() {
-                    id = "_label1",
-                    properties = new List<PropertyStructure>() {
-                        new PropertyStructure() {
-                            name = "label",
-                            value = context.GetProps().label
-                        },
-                        new PropertyStructure() {
-                            name = "visible",
-                            value = "True"
-                        },
-                        new PropertyStructure() {
-                            name = "can_focus",
-                            value = "True"
-                        }
-                    }
-                },
-                PackingDetails = new PackingStructure() {
-                    properties = new List<PropertyStructure>() {
-                        new PropertyStructure() {
-                            name = "expand",
-                            value = "True"
-                        },
-                        new PropertyStructure() {
-                            name = "fill",
-                            value = "True"
-                        },
-                        new PropertyStructure() {
-                            name = "position",
-                            value = "0"
-                        }
-                    }
-                }
-            };
+        protected override RenderResult _Render(LabelProps props) {
+            return null;
         }
     }
 }

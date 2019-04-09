@@ -9,52 +9,20 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
-using System.Collections.Generic;
-using System.Xml.Serialization;
+
+using Gtk;
 
 namespace dnetreact
 {
-    public class BoxComponent: Component<BoxResult, BoxState, BoxProps>, MGtkComponent{
+    public class BoxComponent: Component<BoxState, BoxProps>, MGtkComponent<Container>{
+        public Container widget { get; private set; }
+
         public override BoxState GetInitialState(BoxProps props) {
             return new BoxState();
         }
 
-        protected override BoxResult _Render(ComponentContext<BoxResult, BoxState, BoxProps> context) {
-            return new BoxResult() {
-                BoxData = new BoxResult.BoxResultObject() {
-                    children = context.GetRenderedChildren(),
-                    properties = new List<PropertyStructure>() {
-                        new PropertyStructure() {
-                            name = "visible",
-                            value = "True"
-                        },
-                        new PropertyStructure() {
-                            name = "can_focus",
-                            value = "False"
-                        },
-                        new PropertyStructure() {
-                            name = "margin_left",
-                            value = "4"
-                        },
-                        new PropertyStructure() {
-                            name = "margin_right",
-                            value = "4"
-                        },
-                        new PropertyStructure() {
-                            name = "margin_top",
-                            value = "4"
-                        },
-                        new PropertyStructure() {
-                            name = "margin_bottom",
-                            value = "4"
-                        },
-                        new PropertyStructure() {
-                            name = "orientation",
-                            value = "vertical"
-                        },
-                    }
-                },
-            };
+        protected override RenderResult _Render(ComponentContext<BoxState, BoxProps> context) {
+            return null;
         }
     }
 }

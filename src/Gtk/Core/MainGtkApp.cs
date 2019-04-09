@@ -15,31 +15,22 @@ using Gtk;
 
 namespace dnetreact
 {
-    public class MainGtkApp: Window {
+    public class MainGtkApp {
         private static MainGtkApp _instance { get; set; }
 
         public static MainGtkApp Get() {
             return _instance;
         }
 
-        public static MainGtkApp Create(String glade, String windowId) {
+        public static MainGtkApp Create() {
             if(_instance == null) {
-                using(Stream stream = glade.ToStream()) {
-                    Builder builder = new Builder(stream);
-
-                    _instance = new MainGtkApp(builder, builder.GetObject(windowId).Handle);
-                }
-            } else {
-                _instance.builder.AddFromString(glade);
+                _instance = new MainGtkApp();
             }
 
             return _instance;
         }
-        public Builder builder { get; private set; }
 
-        protected MainGtkApp(Builder _builder, IntPtr handle) : base(handle) {
-            builder = _builder;
-            //builder.Autoconnect(this);
+        protected MainGtkApp() {
         }
     }
 }

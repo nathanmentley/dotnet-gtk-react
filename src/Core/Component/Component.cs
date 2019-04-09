@@ -12,8 +12,7 @@ using System;
 
 namespace dnetreact
 {
-    public abstract class Component<RenderableType, StateType, PropsType>: IDisposable
-        where RenderableType: BaseRenderable
+    public abstract class Component<StateType, PropsType>: IDisposable
         where StateType: BaseState
         where PropsType: BaseProps
     {
@@ -22,27 +21,27 @@ namespace dnetreact
 
         //Overridables
         public abstract StateType GetInitialState(PropsType props);
-        protected abstract RenderableType _Render(ComponentContext<RenderableType, StateType, PropsType> context);
+        protected abstract RenderResult _Render(ComponentContext<StateType, PropsType> context);
         
-        public virtual Boolean ShouldUpdate(ComponentContext<RenderableType, StateType, PropsType> context) {
+        public virtual Boolean ShouldUpdate(ComponentContext<StateType, PropsType> context) {
             //TODO: Only return true if we see prop or state changes.
             return true;
         }
-        public virtual void DidMount(ComponentContext<RenderableType, StateType, PropsType> context) {}
-        public virtual void WillRender(ComponentContext<RenderableType, StateType, PropsType> context) {}
-        public virtual void DidRender(ComponentContext<RenderableType, StateType, PropsType> context) {}
-        public virtual void WillUnmount(ComponentContext<RenderableType, StateType, PropsType> context) {}
+        public virtual void DidMount(ComponentContext<StateType, PropsType> context) {}
+        public virtual void WillRender(ComponentContext<StateType, PropsType> context) {}
+        public virtual void DidRender(ComponentContext<StateType, PropsType> context) {}
+        public virtual void WillUnmount(ComponentContext<StateType, PropsType> context) {}
 
-        protected virtual void _BindElements(ComponentContext<RenderableType, StateType, PropsType> context) {}
+        protected virtual void _BindElements(ComponentContext<StateType, PropsType> context) {}
         
         protected virtual void _Dispose() {}
 
         //Sealed
-        public RenderableType Render(ComponentContext<RenderableType, StateType, PropsType> context) {
+        public RenderResult Render(ComponentContext<StateType, PropsType> context) {
             return this._Render(context);
         }
 
-        public void BindElements(ComponentContext<RenderableType, StateType, PropsType> context) {
+        public void BindElements(ComponentContext<StateType, PropsType> context) {
             this._BindElements(context);
         }
 

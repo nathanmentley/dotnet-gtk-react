@@ -9,73 +9,28 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
-using System.IO;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Xml;
-using System.Xml.Serialization;
-
-using Gtk;
 
 namespace dnetreact
 {
-    public class AppComponent: Component<AppResult, AppState, AppProps>, MGtkComponent{
-        private Window window { get; set; }
-
+    public class AppComponent: Component<AppState, AppProps>{
         public override AppState GetInitialState(AppProps props) {
             return new AppState();
         }
 
-        protected override AppResult _Render(ComponentContext<AppResult, AppState, AppProps> context) {
-            AppResult ret = new AppResult() {
-                requires = new AppResult.Requires(),
-                children = context.GetRenderedChildren()
-            };
-
-            var win = MainGtkApp.Create(GenerateGlad(ret), "MainWindow");
-            win.Show();
-
-            return ret;
+        protected override RenderResult _Render(ComponentContext<AppState, AppProps> context) {
+            return null;
         }
 
-
-        protected override void _BindElements(ComponentContext<AppResult, AppState, AppProps> context) {
-            if(window == null) {
-                window = this.GetGtkElement<Window>("MainWindow");
-                window.DeleteEvent += OnClose;
-            }
+        protected override void _BindElements(ComponentContext<AppState, AppProps> context) {
+            /*if (widget != null) {
+                widget.DeleteEvent += OnClose;
+            }*/
         }
-
+/*
         private void OnClose(object sender, DeleteEventArgs a)
         {
             GtkWidgetToolkit.Quit();
         }
-
-        private String GenerateGlad(AppResult ret) {
-            XmlSerializer xsSubmit = new XmlSerializer(typeof(AppResult), new Type[] {
-                typeof(BoxResult),
-                typeof(ButtonResult),
-                typeof(LabelResult),
-                typeof(WindowResult)
-            });
-            
-            using(StringWriter sww = new UTF8StringWriter())
-            {
-                using(XmlWriter writer = XmlWriter.Create(sww, new XmlWriterSettings() {NamespaceHandling = NamespaceHandling.OmitDuplicates}))
-                {
-                    XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
-                    ns.Add("", "");
-                    xsSubmit.Serialize(writer, ret, ns);
-                    String xml = sww.ToString(); // Your XML
-
-                    //A bit hacky. We need to drop the type and namespaces out of the result for glade.
-                    // TODO: Look for a while to do xml generation without adding a bunch of these attributes
-                    xml = Regex.Replace(xml, "p(\\d)+:type=\"(.*?)\"", "");
-                    xml = Regex.Replace(xml, "xmlns:p(\\d)+=\"(.*?)\"", "");
-
-                    return xml;
-                }
-            }
-        }
+*/
     }
 }

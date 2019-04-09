@@ -9,74 +9,27 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
-using System.Collections.Generic;
-using System.Xml.Serialization;
 
 using Gtk;
 
 namespace dnetreact
 {
-    public class ButtonComponent: Component<ButtonResult, ButtonState, ButtonProps>, MGtkComponent {
-        private Button button { get; set; }
+    public class ButtonComponent: PureComponent<ButtonProps>, MGtkComponent<Button> {
+        public Button widget { get; private set; }
 
-        public override ButtonState GetInitialState(ButtonProps props) {
-            return new ButtonState() {
-                clicks = 0
-            };
+        protected override RenderResult _Render(ButtonProps props) {
+            return null;
         }
 
-        protected override ButtonResult _Render(ComponentContext<ButtonResult, ButtonState, ButtonProps> context) {
-            return new ButtonResult() {
-                ButtonData = new ButtonResult.ButtonResultObject() {
-                    id = "_button1",
-                    properties = new List<PropertyStructure>() {
-                        new PropertyStructure() {
-                            name = "label",
-                            value = context.GetProps().label + " clicks: " + context.GetState().clicks
-                        },
-                        new PropertyStructure() {
-                            name = "visible",
-                            value = "True"
-                        },
-                        new PropertyStructure() {
-                            name = "can_focus",
-                            value = "True"
-                        },
-                        new PropertyStructure() {
-                            name = "receives_default",
-                            value = "True"
-                        }
-                    }
-                },
-                PackingDetails = new PackingStructure() {
-                    properties = new List<PropertyStructure>() {
-                        new PropertyStructure() {
-                            name = "expand",
-                            value = "True"
-                        },
-                        new PropertyStructure() {
-                            name = "fill",
-                            value = "True"
-                        },
-                        new PropertyStructure() {
-                            name = "position",
-                            value = "1"
-                        }
-                    }
-                }
-            };
-        }
-
-        protected override void _BindElements(ComponentContext<ButtonResult, ButtonState, ButtonProps> context) {
-            if(button == null) {
-                button = this.GetGtkElement<Button>("_button1");
-                button.Clicked += (object sender, EventArgs a) => OnClick(context);
+        protected override void _BindElements(ButtonProps props) {
+            if (widget != null) {
+                widget.Clicked += (object sender, EventArgs a) => OnClick(props);
             }
         }
 
-        private void OnClick(ComponentContext<ButtonResult, ButtonState, ButtonProps> context) {
-            if(context.GetProps().OnClick != null) {
-                context.GetProps().OnClick();
+        private void OnClick(ButtonProps props) {
+            if(props?.OnClick != null) {
+                props.OnClick();
             }
         }
     }

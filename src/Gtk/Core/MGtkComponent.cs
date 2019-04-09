@@ -9,17 +9,20 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
-using System.IO;
-using System.Text;
+
+using Gtk;
 
 namespace dnetreact
 {
-    public interface MGtkComponent {}
+    internal interface MGtkComponent<T> 
+    where T: Widget {
+        T widget { get; }
+    }
 
-    public static class MGtkComponentEx {
-        public static T GetGtkElement<T>(this MGtkComponent component, String id)
-        where T: GLib.Object {
-            return (T)MainGtkApp.Get().builder.GetObject(id);
+    internal static class MGtkComponentEx {
+        public static T GetWidget<T>(this MGtkComponent<T> component)
+        where T: Widget {
+            return component.widget;
         }
     }
 }

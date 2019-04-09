@@ -13,25 +13,24 @@ using System.Collections.Generic;
 
 namespace dnetreact
 {
-    public class ComponentProcessor<RenderableType, StateType, PropsType>: IDisposable, IComponentProcessor, IComponentEventDelegate
-        where RenderableType: BaseRenderable
+    public class ComponentProcessor<StateType, PropsType>: IDisposable, IComponentProcessor, IComponentEventDelegate
         where StateType: BaseState
         where PropsType: BaseProps
     {
         private bool disposed = false;
 
-        private Component<RenderableType, StateType, PropsType> component;
-        private ComponentContext<RenderableType, StateType, PropsType> context;
+        private Component<StateType, PropsType> component;
+        private ComponentContext<StateType, PropsType> context;
 
         public ComponentProcessor(
-                Component<RenderableType, StateType, PropsType> _component, PropsType props, IList<IComponentProcessor> children = null
+                Component<StateType, PropsType> _component, Props props, IList<IComponentProcessor> children = null
         ) {
             if(children == null) {
                 children = new List<IComponentProcessor>();
             }
 
             component = _component;
-            context = new ComponentContext<RenderableType, StateType, PropsType>(_component, props, children, this);
+            context = new ComponentContext<StateType, PropsType>(_component, props, children, this);
         }
 
         public void BindElements() {
@@ -42,7 +41,7 @@ namespace dnetreact
             }
         }
 
-        public BaseRenderable ForceUpdate() {
+        public RenderResult ForceUpdate() {
             return _Render();
         }
 
@@ -60,12 +59,12 @@ namespace dnetreact
             }
         }
 
-        protected BaseRenderable _Render() {
+        protected RenderResult _Render() {
             component.WillRender(context);
-            RenderResult<RenderableType> result = new RenderResult<RenderableType>(component.Render(context));
+            RenderResult result = component.Render(context);
             component.DidRender(context);
 
-            return result.GetData();
+            return result;
         }
 
         public void Dispose() {

@@ -9,21 +9,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
-using System.Collections.Generic;
 
 namespace dnetreact
 {
-    public class RenderResult<RenderableType>
-        where RenderableType: BaseRenderable
-    {
-        private RenderableType data;
-
-        public RenderResult(RenderableType _data) {
-            data = _data;
-        }
-
-        public RenderableType GetData() {
-            return data;
-        }
+    public class RenderResult {
+        public RenderResult() {}
     }
 }
