@@ -1,0 +1,11 @@
+/Users/nathanmentley/Projects/dotnet-gtk-react/tools/CsxTranspiler/bin/Debug/netcoreapp2.2/CsxTranspiler.deps.json
+/Users/nathanmentley/Projects/dotnet-gtk-react/tools/CsxTranspiler/bin/Debug/netcoreapp2.2/CsxTranspiler.runtimeconfig.json
+/Users/nathanmentley/Projects/dotnet-gtk-react/tools/CsxTranspiler/bin/Debug/netcoreapp2.2/CsxTranspiler.runtimeconfig.dev.json
+/Users/nathanmentley/Projects/dotnet-gtk-react/tools/CsxTranspiler/bin/Debug/netcoreapp2.2/CsxTranspiler.dll
+/Users/nathanmentley/Projects/dotnet-gtk-react/tools/CsxTranspiler/bin/Debug/netcoreapp2.2/CsxTranspiler.pdb
+/Users/nathanmentley/Projects/dotnet-gtk-react/tools/CsxTranspiler/obj/Debug/netcoreapp2.2/CsxTranspiler.csprojAssemblyReference.cache
+/Users/nathanmentley/Projects/dotnet-gtk-react/tools/CsxTranspiler/obj/Debug/netcoreapp2.2/CsxTranspiler.csproj.CoreCompileInputs.cache
+/Users/nathanmentley/Projects/dotnet-gtk-react/tools/CsxTranspiler/obj/Debug/netcoreapp2.2/CsxTranspiler.AssemblyInfoInputs.cache
+/Users/nathanmentley/Projects/dotnet-gtk-react/tools/CsxTranspiler/obj/Debug/netcoreapp2.2/CsxTranspiler.AssemblyInfo.cs
+/Users/nathanmentley/Projects/dotnet-gtk-react/tools/CsxTranspiler/obj/Debug/netcoreapp2.2/CsxTranspiler.dll
+/Users/nathanmentley/Projects/dotnet-gtk-react/tools/CsxTranspiler/obj/Debug/netcoreapp2.2/CsxTranspiler.pdb
