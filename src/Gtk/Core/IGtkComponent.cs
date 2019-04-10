@@ -14,23 +14,13 @@ using Gtk;
 
 using Deact.Core;
 
-namespace Deact.Gtk.Components
+namespace Deact.Gtk
 {
-    public class WindowComponent: PureComponent<WindowProps>, MGtkComponent<Window, WindowProps> {
-        public Window widget { get; private set; }
+    internal interface IGtkComponent<GTKWidgetType, PropsType> 
+    where GTKWidgetType: Widget
+    where PropsType: BaseProps {
+        GTKWidgetType widget { get; }
 
-        protected override void DidMount(WindowProps props) {
-            BindEvents(props);
-
-            widget = new Window(WindowType.Toplevel);
-        }
-
-        protected override RenderResult _Render(WindowProps props) {
-            Console.WriteLine("Window.");
-            widget.Title = props?.Title;
-            return null;
-        }
-
-        public void BindEvents(WindowProps props) {}
+        void BindEvents(PropsType props);
     }
 }

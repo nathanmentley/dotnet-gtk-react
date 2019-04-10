@@ -9,3 +9,6 @@
 /Users/nathanmentley/Projects/dotnet-gtk-react/tools/CsxTranspiler/obj/Debug/netcoreapp2.2/CsxTranspiler.AssemblyInfo.cs
 /Users/nathanmentley/Projects/dotnet-gtk-react/tools/CsxTranspiler/obj/Debug/netcoreapp2.2/CsxTranspiler.dll
 /Users/nathanmentley/Projects/dotnet-gtk-react/tools/CsxTranspiler/obj/Debug/netcoreapp2.2/CsxTranspiler.pdb
+/Users/nathanmentley/Projects/dotnet-gtk-react/tools/CsxTranspiler/bin/Debug/netcoreapp2.2/Deact.Common.dll
+/Users/nathanmentley/Projects/dotnet-gtk-react/tools/CsxTranspiler/bin/Debug/netcoreapp2.2/Deact.Common.pdb
+/Users/nathanmentley/Projects/dotnet-gtk-react/tools/CsxTranspiler/obj/Debug/netcoreapp2.2/CsxTranspiler.csproj.CopyComplete

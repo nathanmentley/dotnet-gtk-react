@@ -12,14 +12,13 @@ using System;
 
 using Gtk;
 
-namespace dnetreact
+using Deact.Core;
+
+namespace Deact.Gtk
 {
-    internal interface MGtkComponent<GTKWidgetType, PropsType> 
+    internal interface MGtkComponent<GTKWidgetType, PropsType>: IGtkComponent<GTKWidgetType, PropsType> 
     where GTKWidgetType: Widget
     where PropsType: BaseProps {
-        GTKWidgetType widget { get; }
-
-        void BindEvents(PropsType props);
     }
 
     internal static class MGtkComponentEx {

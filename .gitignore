@@ -1,3 +1,11 @@
-src/bin
-src/obj
+src/Common/bin
+src/Common/obj
+src/Core/bin
+src/Core/obj
+src/Gtk/bin
+src/Gtk/obj
+tools/CsxTranspiler/bin
+tools/CsxTranspiler/obj
+samples/bin
+samples/obj
 *.swp

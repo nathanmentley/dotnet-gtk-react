@@ -12,7 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace dnetreact
+namespace Deact.Core
 {
     public class ComponentContext<StateType, PropsType>: IDisposable
         where StateType: BaseState

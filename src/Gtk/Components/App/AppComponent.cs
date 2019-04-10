@@ -10,7 +10,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 using System;
 
-namespace dnetreact
+using Deact.Core;
+
+namespace Deact.Gtk.Components
 {
     public class AppComponent: Component<EmptyState, AppProps>{
         public override EmptyState GetInitialState(AppProps props) {

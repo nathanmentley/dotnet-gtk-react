@@ -10,7 +10,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 using System;
 
-namespace dnetreact
+namespace Deact.Core
 {
     public abstract class BaseState {}
 }

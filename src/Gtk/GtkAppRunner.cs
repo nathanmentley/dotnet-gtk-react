@@ -11,7 +11,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 using System;
 using System.Collections.Generic;
 
-namespace dnetreact
+using Deact.Core;
+using Deact.Gtk.Components;
+
+namespace Deact.Gtk
 {
     public class GtkAppRunner: AppRunner {
         private static GtkAppRunner _instance { get; set; }

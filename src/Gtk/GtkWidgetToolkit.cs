@@ -12,7 +12,9 @@ using System;
 
 using Gtk;
 
-namespace dnetreact
+using Deact.Core;
+
+namespace Deact.Gtk
 {
     public class GtkWidgetToolkit: IWidgetToolkit {
         public static void Quit() {

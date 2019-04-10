@@ -13,7 +13,7 @@ using System.Collections.Generic;
 
 using Newtonsoft.Json;
 
-namespace dnetreact
+namespace Deact.Core
 {
     public class Props: Dictionary<String, Object> {
         internal PropsType BuildProps<PropsType>()

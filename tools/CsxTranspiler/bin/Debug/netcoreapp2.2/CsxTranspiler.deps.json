@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v2.2": {
       "CsxTranspiler/1.0.0": {
+        "dependencies": {
+          "Deact.Common": "1.0.0"
+        },
         "runtime": {
           "CsxTranspiler.dll": {}
+        }
+      },
+      "Deact.Common/1.0.0": {
+        "runtime": {
+          "Deact.Common.dll": {}
         }
       }
     }
   },
   "libraries": {
     "CsxTranspiler/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Deact.Common/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

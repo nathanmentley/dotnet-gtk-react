@@ -12,7 +12,9 @@ using System;
 
 using Gtk;
 
-namespace dnetreact
+using Deact.Core;
+
+namespace Deact.Gtk.Components
 {
     public class LabelComponent: PureComponent<LabelProps>, MGtkComponent<Label, LabelProps> {
         public Label widget { get; private set; }

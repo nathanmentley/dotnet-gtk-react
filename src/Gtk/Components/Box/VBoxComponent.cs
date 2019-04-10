@@ -12,25 +12,7 @@ using System;
 
 using Gtk;
 
-using Deact.Core;
-
 namespace Deact.Gtk.Components
 {
-    public class WindowComponent: PureComponent<WindowProps>, MGtkComponent<Window, WindowProps> {
-        public Window widget { get; private set; }
-
-        protected override void DidMount(WindowProps props) {
-            BindEvents(props);
-
-            widget = new Window(WindowType.Toplevel);
-        }
-
-        protected override RenderResult _Render(WindowProps props) {
-            Console.WriteLine("Window.");
-            widget.Title = props?.Title;
-            return null;
-        }
-
-        public void BindEvents(WindowProps props) {}
-    }
+    public class VBoxComponent: BoxComponent<VBox> {}
 }

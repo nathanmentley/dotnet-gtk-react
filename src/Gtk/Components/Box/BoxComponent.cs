@@ -12,7 +12,9 @@ using System;
 
 using Gtk;
 
-namespace dnetreact
+using Deact.Core;
+
+namespace Deact.Gtk.Components
 {
     abstract public class BoxComponent<BoxType>: Component<EmptyState, BoxProps>, MGtkComponent<BoxType, BoxProps>
     where BoxType: Box, new() {
@@ -35,8 +37,4 @@ namespace dnetreact
 
         public void BindEvents(BoxProps props) {}
     }
-
-    public class HBoxComponent: BoxComponent<HBox> {}
-    
-    public class VBoxComponent: BoxComponent<VBox> {}
 }

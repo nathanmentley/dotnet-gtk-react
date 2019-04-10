@@ -12,7 +12,9 @@ using System;
 
 using Gtk;
 
-namespace dnetreact
+using Deact.Core;
+
+namespace Deact.Gtk.Components
 {
     public class ButtonComponent: PureComponent<ButtonProps>, MGtkComponent<Button, ButtonProps> {
         public Button widget { get; private set; }
