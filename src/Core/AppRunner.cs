@@ -16,23 +16,18 @@ namespace Deact.Core
     public class AppRunner {
         protected void _Run<StateType, PropsType>(
             IWidgetToolkit toolkit,
-            Component<StateType, PropsType> component,
-            Props props,
-            IList<IComponentProcessor> children
+            IComponent component
         )
             where StateType: BaseState
             where PropsType: BaseProps
         {
             toolkit.Init();
 
-            using(var processor = new ComponentProcessor<StateType, PropsType>(component, props, children)) {
-                while(!toolkit.DidFinish()) {
-                    processor.ForceUpdate();
-                    
-                    toolkit.Step();
-                }
+            while(!toolkit.DidFinish()) {
+                component.ForceUpdate();
+                
+                toolkit.Step();
             }
-            Console.WriteLine("exiting");
 
             toolkit.Deinit();
         }

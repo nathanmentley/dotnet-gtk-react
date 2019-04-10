@@ -19,6 +19,7 @@ namespace Deact.Core
         internal PropsType BuildProps<PropsType>()
         where PropsType: BaseProps
         {
+            //TODO: do some reflection magic. Json stuff is weird.
             try {
                 return JsonConvert.DeserializeObject<PropsType>(
                     JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented)

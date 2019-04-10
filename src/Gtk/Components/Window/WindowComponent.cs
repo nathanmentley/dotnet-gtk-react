@@ -9,6 +9,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
+using System.Collections.Generic;
 
 using Gtk;
 
@@ -17,20 +18,21 @@ using Deact.Core;
 namespace Deact.Gtk.Components
 {
     public class WindowComponent: PureComponent<WindowProps>, MGtkComponent<Window, WindowProps> {
+        public WindowComponent(Props _props, IEnumerable<IComponent> _children = null): base(_props, _children) {}
+
         public Window widget { get; private set; }
 
-        protected override void DidMount(WindowProps props) {
-            BindEvents(props);
+        protected override void DidMount() {
+            BindEvents();
 
             widget = new Window(WindowType.Toplevel);
         }
 
-        protected override RenderResult _Render(WindowProps props) {
-            Console.WriteLine("Window.");
+        protected override RenderResult _Render() {
             widget.Title = props?.Title;
             return null;
         }
 
-        public void BindEvents(WindowProps props) {}
+        public void BindEvents() {}
     }
 }

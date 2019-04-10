@@ -9,10 +9,15 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
+using System.Collections.Generic;
 
 using Gtk;
 
+using Deact.Core;
+
 namespace Deact.Gtk.Components
 {
-    public class VBoxComponent: BoxComponent<VBox> {}
+    public class VBoxComponent: BoxComponent<VBox> {
+        public VBoxComponent(Props _props, IEnumerable<IComponent> _children = null): base(_props, _children) {}
+    }
 }

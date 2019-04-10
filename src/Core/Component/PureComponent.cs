@@ -9,6 +9,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
+using System.Collections.Generic;
 
 namespace Deact.Core
 {
@@ -17,35 +18,10 @@ namespace Deact.Core
     public abstract class PureComponent<PropsType>: Component<EmptyState, PropsType>
         where PropsType: BaseProps
     {
-        public override sealed EmptyState GetInitialState(PropsType props) {
+        public PureComponent(Props _props, IEnumerable<IComponent> _children = null): base(_props, _children) {}
+
+        protected override EmptyState GetInitialState() {
             return new EmptyState();
         }
-        protected override sealed RenderResult _Render(ComponentContext<EmptyState, PropsType> context) {
-            return _Render(context.GetProps());
-        }
-        
-        public override sealed Boolean ShouldUpdate(ComponentContext<EmptyState, PropsType> context) {
-            //TODO: Only return true if we see prop or state changes.
-            return true;
-        }
-        public override sealed void DidMount(ComponentContext<EmptyState, PropsType> context) {
-            DidMount(context.GetProps());
-        }
-        public override sealed void WillRender(ComponentContext<EmptyState, PropsType> context) {
-            WillRender(context.GetProps());
-        }
-        public override sealed void DidRender(ComponentContext<EmptyState, PropsType> context) {
-            DidRender(context.GetProps());
-        }
-        public override sealed void WillUnmount(ComponentContext<EmptyState, PropsType> context) {
-            WillUnmount(context.GetProps());
-        }
-
-        protected abstract RenderResult _Render(PropsType props);
-
-        protected virtual void DidMount(PropsType props) {}
-        protected virtual void WillRender(PropsType props) {}
-        protected virtual void DidRender(PropsType props) {}
-        protected virtual void WillUnmount(PropsType props) {}
     }
 }

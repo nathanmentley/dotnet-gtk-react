@@ -9,6 +9,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
+using System.Collections.Generic;
 
 using Gtk;
 
@@ -17,22 +18,23 @@ using Deact.Core;
 namespace Deact.Gtk.Components
 {
     public class LabelComponent: PureComponent<LabelProps>, MGtkComponent<Label, LabelProps> {
+        public LabelComponent(Props _props, IEnumerable<IComponent> _children = null): base(_props, _children) {}
+
         public Label widget { get; private set; }
 
-        protected override void DidMount(LabelProps props) {
-            BindEvents(props);
+        protected override void DidMount() {
+            BindEvents();
 
             widget = new Label();
         }
 
-        protected override RenderResult _Render(LabelProps props) {
-            Console.WriteLine("Label.");
+        protected override RenderResult _Render() {
             widget.Text = props?.Label;
 
             return null;
         }
 
-        public void BindEvents(LabelProps props) {}
+        public void BindEvents() {}
     }
 }
 

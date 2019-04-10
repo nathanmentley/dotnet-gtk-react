@@ -21,6 +21,6 @@ namespace Deact.Gtk
     where PropsType: BaseProps {
         GTKWidgetType widget { get; }
 
-        void BindEvents(PropsType props);
+        void BindEvents();
     }
 }

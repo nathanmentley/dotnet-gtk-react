@@ -9,6 +9,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
+using System.Collections.Generic;
 
 using Gtk;
 
@@ -18,23 +19,24 @@ namespace Deact.Gtk.Components
 {
     abstract public class BoxComponent<BoxType>: Component<EmptyState, BoxProps>, MGtkComponent<BoxType, BoxProps>
     where BoxType: Box, new() {
+        public BoxComponent(Props _props, IEnumerable<IComponent> _children = null): base(_props, _children) {}
+
         public BoxType widget { get; private set; }
 
-        public override EmptyState GetInitialState(BoxProps props) {
+        protected override EmptyState GetInitialState() {
             return new EmptyState();
         }
 
-        public override void DidMount(ComponentContext<EmptyState, BoxProps> context) {
-            BindEvents(context.GetProps());
+        protected override void DidMount() {
+            BindEvents();
 
             widget = new BoxType();
         }
 
-        protected override RenderResult _Render(ComponentContext<EmptyState, BoxProps> context) {
-            Console.WriteLine("Box.");
+        protected override RenderResult _Render() {
             return null;
         }
 
-        public void BindEvents(BoxProps props) {}
+        public void BindEvents() {}
     }
 }

@@ -12,7 +12,7 @@ using System;
 
 namespace Deact.Core
 {
-    public interface IComponentProcessor: IDisposable {
-        RenderResult ForceUpdate();
+    public interface IComponent: IDisposable {
+        void ForceUpdate();
     }
 }

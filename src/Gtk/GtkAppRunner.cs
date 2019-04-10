@@ -20,40 +20,28 @@ namespace Deact.Gtk
         private static GtkAppRunner _instance { get; set; }
 
         public static void Execute<StateType, PropsType>(
-            Component<StateType, PropsType> component,
-            Props props,
-            IList<IComponentProcessor> children = null
+            IComponent component
         )
             where StateType: BaseState
             where PropsType: BaseProps
         {
             if(_instance == null) {
                 _instance = new GtkAppRunner();
-                _instance.Run(component, props, children);
+                _instance.Run<StateType, PropsType>(component);
             } else {
                 //throw exception
             }
         }
 
         private void Run<StateType, PropsType>(
-            Component<StateType, PropsType> component,
-            Props props,
-            IList<IComponentProcessor> children = null
+            IComponent component
         )
             where StateType: BaseState
             where PropsType: BaseProps
         {
-            _Run(
+            _Run<StateType, PropsType>(
                 new GtkWidgetToolkit(),
-                new AppComponent(),
-                new Props(),
-                new List<IComponentProcessor>() {
-                    new ComponentProcessor<StateType, PropsType>(
-                        component,
-                        props,
-                        children
-                    )
-                }
+                component
             );
         }
     }

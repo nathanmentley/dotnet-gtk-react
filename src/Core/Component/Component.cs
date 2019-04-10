@@ -9,36 +9,82 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Deact.Core
 {
-    public abstract class Component<StateType, PropsType>: IDisposable
+    public abstract class Component<StateType, PropsType>: IComponent
         where StateType: BaseState
         where PropsType: BaseProps
     {
         //data
         private bool disposed = false;
+        private RenderResult lastResult = null;
+
+        protected PropsType props { get; private set; }
+        protected StateType state { get; private set; }
+        protected IEnumerable<IComponent> children { get; private set; }
+
+        //constructore
+        public Component(Props _props, IEnumerable<IComponent> _children = null) {
+            props = _props.BuildProps<PropsType>();
+            children = _children;
+            state = GetInitialState();
+        }
 
         //Overridables
-        public abstract StateType GetInitialState(PropsType props);
-        protected abstract RenderResult _Render(ComponentContext<StateType, PropsType> context);
+        protected abstract StateType GetInitialState();
+        protected abstract RenderResult _Render();
         
-        public virtual Boolean ShouldUpdate(ComponentContext<StateType, PropsType> context) {
+        protected virtual Boolean ShouldUpdate(PropsType nextProps, StateType nextState) {
             //TODO: Only return true if we see prop or state changes.
             return true;
         }
-        public virtual void DidMount(ComponentContext<StateType, PropsType> context) {}
-        public virtual void WillRender(ComponentContext<StateType, PropsType> context) {}
-        public virtual void DidRender(ComponentContext<StateType, PropsType> context) {}
-        public virtual void WillUnmount(ComponentContext<StateType, PropsType> context) {}
+        protected virtual void DidMount() {}
+        protected virtual void WillRender() {}
+        protected virtual void DidRender() {}
+        protected virtual void WillUnmount() {}
         
         protected virtual void _Dispose() {}
 
         //Sealed
-        public RenderResult Render(ComponentContext<StateType, PropsType> context) {
-            return this._Render(context);
+        internal RenderResult Render(PropsType nextProps, StateType nextState) {
+            if(lastResult == null || ShouldUpdate(nextProps, nextState)) {
+                props = nextProps;
+                state = nextState;
+
+                if(lastResult == null) {
+                    DidMount();
+                }
+
+                WillRender();
+                lastResult = this._Render();
+                DidRender();
+            }
+
+            return lastResult;
         }
 
+        public RenderResult Render() {
+            return Render(props, state);
+        }
+
+        public void ForceUpdate() {
+            Render();
+        }
+
+        protected void SetState(StateType newState) {
+            //TODO: ensure we're not rendering?
+            Render(props, newState);
+        }
+
+        internal void SetProps(PropsType newProps) {
+            //TODO: ensure we're not rendering?
+            Render(newProps, state);
+        }
+
+        //IDisposable
         public void Dispose() {
             Dispose(true);
             GC.SuppressFinalize(this); 
@@ -49,6 +95,10 @@ namespace Deact.Core
                 return; 
       
             if (disposing) {
+                children?.ToList()?.ForEach(child => child.Dispose());
+
+                WillUnmount();
+
                 _Dispose();
             }
             

@@ -9,18 +9,20 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
+using System.Collections.Generic;
 
 using Deact.Core;
 
 namespace Deact.Gtk.Components
 {
-    public class AppComponent: Component<EmptyState, AppProps>{
-        public override EmptyState GetInitialState(AppProps props) {
+    internal class AppComponent: Component<EmptyState, AppProps>{
+        internal AppComponent(Props _props, IEnumerable<IComponent> _children = null): base(_props, _children) {}
+
+        protected override EmptyState GetInitialState() {
             return new EmptyState();
         }
 
-        protected override RenderResult _Render(ComponentContext<EmptyState, AppProps> context) {
-            Console.WriteLine("App.");
+        protected override RenderResult _Render() {
             return null;
         }
     }

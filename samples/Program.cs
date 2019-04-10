@@ -33,7 +33,6 @@ namespace DeactSample
             );
 
             Which is the ultimate goal. Tho, I'm not deadset on the xml format if something is still clean and easy to do.
-            */
             GtkAppRunner.Execute(
                 new WindowComponent(), new Props() {
                         {
@@ -57,6 +56,7 @@ namespace DeactSample
                     })
                 }
             );
+            */
         }
     }
 }

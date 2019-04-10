@@ -9,6 +9,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
+using System.Collections.Generic;
 
 using Gtk;
 
@@ -17,27 +18,28 @@ using Deact.Core;
 namespace Deact.Gtk.Components
 {
     public class ButtonComponent: PureComponent<ButtonProps>, MGtkComponent<Button, ButtonProps> {
+        public ButtonComponent(Props _props, IEnumerable<IComponent> _children = null): base(_props, _children) {}
+
         public Button widget { get; private set; }
 
-        protected override void DidMount(ButtonProps props) {
-            BindEvents(props);
+        protected override void DidMount() {
+            BindEvents();
 
             widget = new Button();
         }
 
-        protected override RenderResult _Render(ButtonProps props) {
-            Console.WriteLine("Button.");
+        protected override RenderResult _Render() {
             widget.Label = props?.Label;
             return null;
         }
 
-        public void BindEvents(ButtonProps props) {
+        public void BindEvents() {
             if (widget != null) {
-                widget.Clicked += (object sender, EventArgs a) => OnClick(props);
+                widget.Clicked += (object sender, EventArgs a) => OnClick();
             }
         }
 
-        private void OnClick(ButtonProps props) {
+        private void OnClick() {
             if(props?.OnClick != null) {
                 props.OnClick();
             }
