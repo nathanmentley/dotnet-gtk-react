@@ -13,16 +13,20 @@ using System.Collections.Generic;
 
 using Deact.Core;
 
-namespace Deact.Gtk.Components
+namespace Deact
 {
-    internal class AppComponent: Component<EmptyState, AppProps>{
-        protected override EmptyState GetInitialState() {
-            return new EmptyState();
-        }
+    public static class Deact {
+        public static IComponent Create<ComponentType, PropsType>(PropsType _props, IEnumerable<IComponent> _children = null)
+        where ComponentType: BaseComponent
+        where PropsType: BaseProps
+        {
+            //create instance and call internal Init
+            ComponentType instance = (ComponentType)Activator.CreateInstance(typeof(ComponentType));
 
-        protected override RenderResult _Render() {
-            Console.WriteLine("app.");
-            return null;
+            instance.Init("TODO: Key", _props.ToProps(), _children);
+
+            return instance;
         }
     }
 }
+

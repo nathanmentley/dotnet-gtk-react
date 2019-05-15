@@ -19,15 +19,13 @@ namespace Deact.Gtk.Components
 {
     abstract public class BoxComponent<BoxType>: Component<EmptyState, BoxProps>, MGtkComponent<BoxType, BoxProps>
     where BoxType: Box, new() {
-        public BoxComponent(Props _props, IEnumerable<IComponent> _children = null): base(_props, _children) {}
-
         public BoxType widget { get; private set; }
 
         protected override EmptyState GetInitialState() {
             return new EmptyState();
         }
 
-        protected override void DidMount() {
+        protected override void _DidMount() {
             BindEvents();
 
             widget = new BoxType();

@@ -11,18 +11,36 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 using System;
 using System.Collections.Generic;
 
+using Deact;
 using Deact.Core;
+using Deact.Cli.Components;
 
-namespace Deact.Gtk.Components
+namespace Deact.Cli
 {
-    internal class AppComponent: Component<EmptyState, AppProps>{
-        protected override EmptyState GetInitialState() {
-            return new EmptyState();
+    public class CliAppRunner: AppRunner {
+        private static CliAppRunner _instance { get; set; }
+
+        public static void Execute(IComponent component)
+        {
+            if(_instance == null) {
+                _instance = new CliAppRunner();
+                _instance.Run(component);
+            } else {
+                //throw exception
+            }
         }
 
-        protected override RenderResult _Render() {
-            Console.WriteLine("app.");
-            return null;
+        protected internal void Run(IComponent component)
+        {
+            _Run(
+                new CliWidgetToolkit(),
+                Deact.Create<AppComponent>(
+                    new Props(),
+                    new List<IComponent>() {
+                        component
+                    }
+                )
+            );
         }
     }
 }

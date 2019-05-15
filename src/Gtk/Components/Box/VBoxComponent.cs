@@ -17,7 +17,5 @@ using Deact.Core;
 
 namespace Deact.Gtk.Components
 {
-    public class VBoxComponent: BoxComponent<VBox> {
-        public VBoxComponent(Props _props, IEnumerable<IComponent> _children = null): base(_props, _children) {}
-    }
+    public class VBoxComponent: BoxComponent<VBox> {}
 }

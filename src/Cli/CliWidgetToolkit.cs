@@ -9,20 +9,29 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
-using System.Collections.Generic;
 
 using Deact.Core;
 
-namespace Deact.Gtk.Components
+namespace Deact.Cli
 {
-    internal class AppComponent: Component<EmptyState, AppProps>{
-        protected override EmptyState GetInitialState() {
-            return new EmptyState();
+    public class CliWidgetToolkit: IWidgetToolkit {
+        public static void Quit() {
+            finished = true;
+        }
+        private static Boolean finished { get; set; }
+
+        public void Init() {
+            finished = false;
         }
 
-        protected override RenderResult _Render() {
-            Console.WriteLine("app.");
-            return null;
+        public void Step() {
+        }
+
+        public Boolean DidFinish() {
+            return finished;
+        }
+
+        public void Deinit() {
         }
     }
 }

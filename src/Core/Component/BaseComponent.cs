@@ -1,3 +1,4 @@
+
 /*
 Copyright 2019 Nathan Mentley
 
@@ -11,18 +12,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 using System;
 using System.Collections.Generic;
 
-using Deact.Core;
-
-namespace Deact.Gtk.Components
+namespace Deact.Core
 {
-    internal class AppComponent: Component<EmptyState, AppProps>{
-        protected override EmptyState GetInitialState() {
-            return new EmptyState();
-        }
+    public abstract class BaseComponent: IComponent {
+        public abstract void ForceUpdate();
 
-        protected override RenderResult _Render() {
-            Console.WriteLine("app.");
-            return null;
-        }
+        internal abstract void Init(String _key, Props _props, IEnumerable<IComponent> _children = null);
+
+        public abstract void Dispose();
     }
 }

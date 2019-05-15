@@ -14,42 +14,66 @@ using System.Linq;
 
 namespace Deact.Core
 {
-    public abstract class Component<StateType, PropsType>: IComponent
+    public abstract class Component<StateType, PropsType>: BaseComponent
         where StateType: BaseState
         where PropsType: BaseProps
     {
         //data
-        private bool disposed = false;
-        private RenderResult lastResult = null;
-
-        protected PropsType props { get; private set; }
-        protected StateType state { get; private set; }
-        protected IEnumerable<IComponent> children { get; private set; }
-
-        //constructore
-        public Component(Props _props, IEnumerable<IComponent> _children = null) {
-            props = _props.BuildProps<PropsType>();
-            children = _children;
-            state = GetInitialState();
-        }
+        protected bool initialized { get; private set ;} = false;
+        protected PropsType props { get; private set; } = null;
+        protected StateType state { get; private set; } = null;
+        protected IEnumerable<IComponent> children { get; private set; } = new List<IComponent>();
+        private bool disposed { get; set ;} = false;
+        private RenderResult lastResult { get; set; } = null;
 
         //Overridables
         protected abstract StateType GetInitialState();
         protected abstract RenderResult _Render();
-        
+        //Optional overrides
         protected virtual Boolean ShouldUpdate(PropsType nextProps, StateType nextState) {
             //TODO: Only return true if we see prop or state changes.
             return true;
         }
-        protected virtual void DidMount() {}
-        protected virtual void WillRender() {}
-        protected virtual void DidRender() {}
-        protected virtual void WillUnmount() {}
-        
+        protected virtual void _Init() {}
+        protected virtual void _DidMount() {}
+        protected virtual void _WillRender() {}
+        protected virtual void _DidRender() {}
+        protected virtual void _WillUnmount() {}
         protected virtual void _Dispose() {}
 
         //Sealed
-        internal RenderResult Render(PropsType nextProps, StateType nextState) {
+        internal sealed override void Init(String _key, Props _props, IEnumerable<IComponent> _children = null) {
+            initialized = true;
+
+            props = _props.BuildProps<PropsType>();
+            children = _children;
+            state = GetInitialState();
+
+            //TODO: Handle key.
+
+            //TODO: is this needed for the lifecycle? I think _DidMount is really what is useful?
+            _Init();
+        }
+
+        internal protected void DidMount() {
+            _DidMount();
+        }
+        internal protected void WillRender() {
+            _WillRender();
+        }
+        internal protected void DidRender() {
+            _DidRender();
+        }
+        internal protected void WillUnmount() {
+            _WillUnmount();
+        }
+
+        internal protected RenderResult Render(PropsType nextProps, StateType nextState) {
+            if(!initialized) {
+                //TODO: throw exception. <- This probably means the component wasn't created with Deact.Create
+                // and the dev is doing something silly and unsupported.
+            }
+
             if(lastResult == null || ShouldUpdate(nextProps, nextState)) {
                 props = nextProps;
                 state = nextState;
@@ -70,22 +94,22 @@ namespace Deact.Core
             return Render(props, state);
         }
 
-        public void ForceUpdate() {
+        public override void ForceUpdate() {
             Render();
         }
 
         protected void SetState(StateType newState) {
-            //TODO: ensure we're not rendering?
+            //TODO: ensure we're not rendering when this is called?
             Render(props, newState);
         }
 
         internal void SetProps(PropsType newProps) {
-            //TODO: ensure we're not rendering?
+            //TODO: ensure we're not rendering when this is called?
             Render(newProps, state);
         }
 
         //IDisposable
-        public void Dispose() {
+        public override void Dispose() {
             Dispose(true);
             GC.SuppressFinalize(this); 
         }

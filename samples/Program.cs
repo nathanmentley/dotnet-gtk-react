@@ -11,6 +11,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 using System;
 using System.Collections.Generic;
 
+using Deact;
 using Deact.Core;
 using Deact.Gtk;
 using Deact.Gtk.Components;
@@ -24,7 +25,7 @@ namespace DeactSample
             /*
             If we had a jsx like preprocessor we could write this:
             GtkAppRunner.Execute(
-                <Window Title="Ziggy">
+                <Window Title="DotNet React Window Title">
                     <HBox>
                         <Label Label={this.localVariable} />
                         <Button Label="Hello World Button" OnClick={this.callBack} />
@@ -32,14 +33,17 @@ namespace DeactSample
                 </Window>
             );
 
-            Which is the ultimate goal. Tho, I'm not deadset on the xml format if something is still clean and easy to do.
+            Which is the ultimate goal. Tho, I'm not deadset on the xml format if something is still clean and easy to use.
+            */
             GtkAppRunner.Execute(
-                new WindowComponent(), new Props() {
+                Deact.Deact.Create<WindowComponent, WindowProps>(new WindowProps(){ Title="DotNet React Window Title" })
+                /*new WindowComponent(), new Props() {
                         {
                             "Title", "DotNet React Window Title"
                         }
-                    }, new List<IComponentProcessor>() {
-                    new ComponentProcessor<EmptyState, BoxProps>(new HBoxComponent(), new Props(), new List<IComponentProcessor>() {
+                    }, new List<IComponent>() {}
+                        */ /* 
+                    new HBoxComponent(), new Props(), new List<IComponent>() {
                         new ComponentProcessor<EmptyState, LabelProps>(new LabelComponent(), new Props{
                             {
                                 "Label", "Hello World"
@@ -52,11 +56,10 @@ namespace DeactSample
                             {
                                 "OnClick", (Action)(() => { Console.WriteLine("Button Click"); })
                             }
-                        })
-                    })
-                }
+                        })*/
+                    //})
+                //}
             );
-            */
         }
     }
 }

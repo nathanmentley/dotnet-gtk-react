@@ -18,11 +18,9 @@ using Deact.Core;
 namespace Deact.Gtk.Components
 {
     public class ButtonComponent: PureComponent<ButtonProps>, MGtkComponent<Button, ButtonProps> {
-        public ButtonComponent(Props _props, IEnumerable<IComponent> _children = null): base(_props, _children) {}
-
         public Button widget { get; private set; }
 
-        protected override void DidMount() {
+        protected override void _DidMount() {
             BindEvents();
 
             widget = new Button();

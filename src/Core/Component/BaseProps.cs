@@ -12,5 +12,9 @@ using System;
 
 namespace Deact.Core
 {
-    public abstract class BaseProps {}
+    public abstract class BaseProps {
+        internal Props ToProps() {
+            return new Props();
+        }
+    }
 }

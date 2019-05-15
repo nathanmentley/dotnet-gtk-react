@@ -18,11 +18,9 @@ using Deact.Core;
 namespace Deact.Gtk.Components
 {
     public class LabelComponent: PureComponent<LabelProps>, MGtkComponent<Label, LabelProps> {
-        public LabelComponent(Props _props, IEnumerable<IComponent> _children = null): base(_props, _children) {}
-
         public Label widget { get; private set; }
 
-        protected override void DidMount() {
+        protected override void _DidMount() {
             BindEvents();
 
             widget = new Label();

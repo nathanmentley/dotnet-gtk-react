@@ -14,12 +14,7 @@ using System.Collections.Generic;
 namespace Deact.Core
 {
     public class AppRunner {
-        protected void _Run<StateType, PropsType>(
-            IWidgetToolkit toolkit,
-            IComponent component
-        )
-            where StateType: BaseState
-            where PropsType: BaseProps
+        protected void _Run(IWidgetToolkit toolkit, IComponent component)
         {
             toolkit.Init();
 

@@ -1,0 +1,12 @@
+/Users/nathanmentley/Projects/dotnet-gtk-react/src/Cli/bin/Debug/netstandard2.0/Deact.Cli.deps.json
+/Users/nathanmentley/Projects/dotnet-gtk-react/src/Cli/bin/Debug/netstandard2.0/Deact.Cli.dll
+/Users/nathanmentley/Projects/dotnet-gtk-react/src/Cli/bin/Debug/netstandard2.0/Deact.Cli.pdb
+/Users/nathanmentley/Projects/dotnet-gtk-react/src/Cli/bin/Debug/netstandard2.0/Deact.Core.dll
+/Users/nathanmentley/Projects/dotnet-gtk-react/src/Cli/bin/Debug/netstandard2.0/Deact.Core.pdb
+/Users/nathanmentley/Projects/dotnet-gtk-react/src/Cli/obj/Debug/netstandard2.0/Deact.Cli.csprojAssemblyReference.cache
+/Users/nathanmentley/Projects/dotnet-gtk-react/src/Cli/obj/Debug/netstandard2.0/Deact.Cli.csproj.CoreCompileInputs.cache
+/Users/nathanmentley/Projects/dotnet-gtk-react/src/Cli/obj/Debug/netstandard2.0/Deact.Cli.AssemblyInfoInputs.cache
+/Users/nathanmentley/Projects/dotnet-gtk-react/src/Cli/obj/Debug/netstandard2.0/Deact.Cli.AssemblyInfo.cs
+/Users/nathanmentley/Projects/dotnet-gtk-react/src/Cli/obj/Debug/netstandard2.0/Deact.Cli.csproj.CopyComplete
+/Users/nathanmentley/Projects/dotnet-gtk-react/src/Cli/obj/Debug/netstandard2.0/Deact.Cli.dll
+/Users/nathanmentley/Projects/dotnet-gtk-react/src/Cli/obj/Debug/netstandard2.0/Deact.Cli.pdb

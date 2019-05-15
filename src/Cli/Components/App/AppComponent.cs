@@ -13,7 +13,7 @@ using System.Collections.Generic;
 
 using Deact.Core;
 
-namespace Deact.Gtk.Components
+namespace Deact.Cli.Components
 {
     internal class AppComponent: Component<EmptyState, AppProps>{
         protected override EmptyState GetInitialState() {
