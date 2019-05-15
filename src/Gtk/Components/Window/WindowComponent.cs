@@ -27,12 +27,15 @@ namespace Deact.Gtk.Components
 
         protected override void CreateWidget() {
             _widget = new Window(WindowType.Toplevel);
-            widget.Show();
         }
 
         protected override RenderResult _Render() {
             widget.Title = props?.Title;
             return new RenderResult(this.children);
+        }
+        
+        protected override void __DidRender() {
+            widget.ShowAll();
         }
 
         protected override void BindEvents() {}

@@ -18,6 +18,8 @@ namespace Deact.Gtk
 {
     internal interface IGtkComponent {
         Widget GetWidget();
+
+        Boolean IsMounted { get; set; }
     }
 
     public abstract class GtkComponent<GTKWidgetType, StateType, PropsType>: Component<StateType, PropsType>, IGtkComponent
@@ -25,6 +27,7 @@ namespace Deact.Gtk
     where StateType: BaseState
     where PropsType: BaseProps {
         public abstract GTKWidgetType widget { get; }
+        public Boolean IsMounted { get; set; }
         protected abstract void CreateWidget();
         protected abstract void BindEvents();
 
@@ -36,19 +39,30 @@ namespace Deact.Gtk
             CreateWidget();
             BindEvents();
 
+            IsMounted = false;
+
+            __DidMount();
+        }
+
+        protected virtual void __DidRender() {}
+        protected sealed override void _DidRender() {
             if(children != null) {
                 foreach(var child in children) {
                     if(child is IGtkComponent) {
-                        if(GetWidget() is Container) {
-                            Console.WriteLine("add child");
-                            var childWidget = ((IGtkComponent)child).GetWidget();
-                            ((Container)GetWidget()).Add(childWidget);
+                        if(!((IGtkComponent)child).IsMounted) {
+                            if(GetWidget() is Container) {
+                                var childWidget = ((IGtkComponent)child).GetWidget();
+
+                                ((Container)GetWidget()).Add(childWidget);
+
+                                ((IGtkComponent)child).IsMounted = true;
+                            }
                         }
                     }
                 }
             }
 
-            __DidMount();
+            __DidRender();
         }
     }
 }
