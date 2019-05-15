@@ -9,12 +9,19 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
+using System.Reflection;
 
 namespace Deact.Core
 {
     public abstract class BaseProps {
         internal Props ToProps() {
-            return new Props();
+            Props ret = new Props();
+
+            foreach (PropertyInfo propertyInfo in GetType().GetProperties()) {
+                ret[propertyInfo.Name] = propertyInfo.GetValue(this);
+            }
+
+            return ret;
         }
     }
 }

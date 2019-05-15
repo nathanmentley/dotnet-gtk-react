@@ -18,15 +18,12 @@ using Deact.Core;
 namespace Deact.Gtk.Components
 {
     public class WindowComponent: GtkComponent<Window, EmptyState, WindowProps> {
-        private Window _widget;
-        public override Window widget { get { return _widget; } }
-
         protected override EmptyState _GetInitialState() {
             return new EmptyState();
         }
 
-        protected override void CreateWidget() {
-            _widget = new Window(WindowType.Toplevel);
+        protected override Window CreateWidget() {
+            return new Window(WindowType.Toplevel);
         }
 
         protected override RenderResult _Render() {

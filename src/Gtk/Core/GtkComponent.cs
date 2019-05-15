@@ -26,9 +26,9 @@ namespace Deact.Gtk
     where GTKWidgetType: Widget
     where StateType: BaseState
     where PropsType: BaseProps {
-        public abstract GTKWidgetType widget { get; }
+        protected GTKWidgetType widget { get; private set; }
         public Boolean IsMounted { get; set; }
-        protected abstract void CreateWidget();
+        protected abstract GTKWidgetType CreateWidget();
         protected abstract void BindEvents();
 
         public Widget GetWidget() {
@@ -36,7 +36,7 @@ namespace Deact.Gtk
         }
         protected virtual void __DidMount() {}
         protected sealed override void _DidMount() {
-            CreateWidget();
+            widget = CreateWidget();
             BindEvents();
 
             IsMounted = false;

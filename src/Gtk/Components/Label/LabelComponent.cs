@@ -18,15 +18,12 @@ using Deact.Core;
 namespace Deact.Gtk.Components
 {
     public class LabelComponent: GtkComponent<Label, EmptyState, LabelProps> {
-        private Label _widget;
-        public override Label widget { get { return _widget; } }
-
         protected override EmptyState _GetInitialState() {
             return new EmptyState();
         }
 
-        protected override void CreateWidget() {
-            _widget = new Label();
+        protected override Label CreateWidget() {
+            return new Label();
         }
 
         protected override RenderResult _Render() {

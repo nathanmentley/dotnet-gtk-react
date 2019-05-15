@@ -1,4 +1,4 @@
-# Dot Net React
+# Deact - dotnet-gtk-react
 
 A work in progress cross-platform desktop gui library inspired by reactjs written on top of gtksharp.
 

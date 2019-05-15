@@ -18,15 +18,12 @@ using Deact.Core;
 namespace Deact.Gtk.Components
 {
     public class ButtonComponent: GtkComponent<Button, EmptyState, ButtonProps> {
-        private Button _widget;
-        public override Button widget { get { return _widget; } }
-
         protected override EmptyState _GetInitialState() {
             return new EmptyState();
         }
 
-        protected override void CreateWidget() {
-            _widget = new Button();
+        protected override Button CreateWidget() {
+            return new Button(props?.Label);
         }
 
         protected override RenderResult _Render() {

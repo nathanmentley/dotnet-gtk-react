@@ -19,15 +19,12 @@ namespace Deact.Gtk.Components
 {
     abstract public class BoxComponent<BoxType>: GtkComponent<BoxType, EmptyState, BoxProps>
     where BoxType: Box, new() {
-        private BoxType _widget;
-        public override BoxType widget { get { return _widget; } }
-
         protected override EmptyState _GetInitialState() {
             return new EmptyState();
         }
 
-        protected override void CreateWidget() {
-            _widget = new BoxType();
+        protected override BoxType CreateWidget() {
+            return new BoxType();
         }
 
         protected override RenderResult _Render() {
