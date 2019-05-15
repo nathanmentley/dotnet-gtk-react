@@ -17,22 +17,24 @@ using Deact.Core;
 
 namespace Deact.Gtk.Components
 {
-    public class LabelComponent: PureComponent<LabelProps>, MGtkComponent<Label, LabelProps> {
-        public Label widget { get; private set; }
+    public class LabelComponent: GtkComponent<Label, EmptyState, LabelProps> {
+        private Label _widget;
+        public override Label widget { get { return _widget; } }
 
-        protected override void _DidMount() {
-            BindEvents();
+        protected override EmptyState _GetInitialState() {
+            return new EmptyState();
+        }
 
-            widget = new Label();
+        protected override void CreateWidget() {
+            _widget = new Label();
         }
 
         protected override RenderResult _Render() {
             widget.Text = props?.Label;
-
-            return null;
+            return new RenderResult(this.children);
         }
 
-        public void BindEvents() {}
+        protected override void BindEvents() {}
     }
 }
 

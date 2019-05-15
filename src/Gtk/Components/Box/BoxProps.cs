@@ -14,6 +14,5 @@ using Deact.Core;
 
 namespace Deact.Gtk.Components
 {
-    public class BoxProps: BaseProps {
-    }
+    public class BoxProps: BaseProps {}
 }

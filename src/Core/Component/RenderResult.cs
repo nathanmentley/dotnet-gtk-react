@@ -9,10 +9,22 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Deact.Core
 {
     public class RenderResult {
-        public RenderResult() {}
+        public IEnumerable<IComponent> children { get; set; }
+
+        public RenderResult(IEnumerable<IComponent> _children = null) {
+            children = _children;
+
+            if(children != null) {
+                foreach(IComponent child in children) {
+                    child.ForceUpdate();
+                }
+            }
+        }
     }
 }

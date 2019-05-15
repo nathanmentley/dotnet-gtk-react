@@ -18,7 +18,7 @@ namespace Deact.Core
     public abstract class PureComponent<PropsType>: Component<EmptyState, PropsType>
         where PropsType: BaseProps
     {
-        protected override EmptyState GetInitialState() {
+        protected override EmptyState _GetInitialState() {
             return new EmptyState();
         }
     }

@@ -16,13 +16,12 @@ using Deact.Core;
 namespace Deact.Gtk.Components
 {
     internal class AppComponent: Component<EmptyState, AppProps>{
-        protected override EmptyState GetInitialState() {
+        protected override EmptyState _GetInitialState() {
             return new EmptyState();
         }
 
         protected override RenderResult _Render() {
-            Console.WriteLine("app.");
-            return null;
+            return new RenderResult(this.children);
         }
     }
 }

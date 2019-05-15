@@ -16,12 +16,14 @@ using Deact.Core;
 namespace Deact.Cli.Components
 {
     internal class AppComponent: Component<EmptyState, AppProps>{
-        protected override EmptyState GetInitialState() {
+        protected override EmptyState _GetInitialState() {
             return new EmptyState();
         }
 
         protected override RenderResult _Render() {
-            Console.WriteLine("app.");
+            this.props.
+
+            //Console.WriteLine("app.");
             return null;
         }
     }

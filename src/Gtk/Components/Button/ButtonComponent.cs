@@ -17,21 +17,24 @@ using Deact.Core;
 
 namespace Deact.Gtk.Components
 {
-    public class ButtonComponent: PureComponent<ButtonProps>, MGtkComponent<Button, ButtonProps> {
-        public Button widget { get; private set; }
+    public class ButtonComponent: GtkComponent<Button, EmptyState, ButtonProps> {
+        private Button _widget;
+        public override Button widget { get { return _widget; } }
 
-        protected override void _DidMount() {
-            BindEvents();
+        protected override EmptyState _GetInitialState() {
+            return new EmptyState();
+        }
 
-            widget = new Button();
+        protected override void CreateWidget() {
+            _widget = new Button();
         }
 
         protected override RenderResult _Render() {
             widget.Label = props?.Label;
-            return null;
+            return new RenderResult(this.children);
         }
 
-        public void BindEvents() {
+        protected override void BindEvents() {
             if (widget != null) {
                 widget.Clicked += (object sender, EventArgs a) => OnClick();
             }

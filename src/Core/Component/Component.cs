@@ -27,7 +27,7 @@ namespace Deact.Core
         private RenderResult lastResult { get; set; } = null;
 
         //Overridables
-        protected abstract StateType GetInitialState();
+        protected abstract StateType _GetInitialState();
         protected abstract RenderResult _Render();
         //Optional overrides
         protected virtual Boolean ShouldUpdate(PropsType nextProps, StateType nextState) {
@@ -53,6 +53,10 @@ namespace Deact.Core
 
             //TODO: is this needed for the lifecycle? I think _DidMount is really what is useful?
             _Init();
+        }
+
+        internal protected StateType GetInitialState() {
+            return _GetInitialState();
         }
 
         internal protected void DidMount() {

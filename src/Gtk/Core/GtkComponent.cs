@@ -16,11 +16,39 @@ using Deact.Core;
 
 namespace Deact.Gtk
 {
-    internal interface IGtkComponent<GTKWidgetType, PropsType> 
-    where GTKWidgetType: Widget
-    where PropsType: BaseProps {
-        GTKWidgetType widget { get; }
+    internal interface IGtkComponent {
+        Widget GetWidget();
+    }
 
-        void BindEvents();
+    public abstract class GtkComponent<GTKWidgetType, StateType, PropsType>: Component<StateType, PropsType>, IGtkComponent
+    where GTKWidgetType: Widget
+    where StateType: BaseState
+    where PropsType: BaseProps {
+        public abstract GTKWidgetType widget { get; }
+        protected abstract void CreateWidget();
+        protected abstract void BindEvents();
+
+        public Widget GetWidget() {
+            return widget;
+        }
+        protected virtual void __DidMount() {}
+        protected sealed override void _DidMount() {
+            CreateWidget();
+            BindEvents();
+
+            if(children != null) {
+                foreach(var child in children) {
+                    if(child is IGtkComponent) {
+                        if(GetWidget() is Container) {
+                            Console.WriteLine("add child");
+                            var childWidget = ((IGtkComponent)child).GetWidget();
+                            ((Container)GetWidget()).Add(childWidget);
+                        }
+                    }
+                }
+            }
+
+            __DidMount();
+        }
     }
 }

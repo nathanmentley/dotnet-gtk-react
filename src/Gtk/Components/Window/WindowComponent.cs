@@ -17,20 +17,24 @@ using Deact.Core;
 
 namespace Deact.Gtk.Components
 {
-    public class WindowComponent: PureComponent<WindowProps>, MGtkComponent<Window, WindowProps> {
-        public Window widget { get; private set; }
+    public class WindowComponent: GtkComponent<Window, EmptyState, WindowProps> {
+        private Window _widget;
+        public override Window widget { get { return _widget; } }
 
-        protected override void _DidMount() {
-            BindEvents();
+        protected override EmptyState _GetInitialState() {
+            return new EmptyState();
+        }
 
-            widget = new Window(WindowType.Toplevel);
+        protected override void CreateWidget() {
+            _widget = new Window(WindowType.Toplevel);
+            widget.Show();
         }
 
         protected override RenderResult _Render() {
             widget.Title = props?.Title;
-            return null;
+            return new RenderResult(this.children);
         }
 
-        public void BindEvents() {}
+        protected override void BindEvents() {}
     }
 }

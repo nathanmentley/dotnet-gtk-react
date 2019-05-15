@@ -36,29 +36,27 @@ namespace DeactSample
             Which is the ultimate goal. Tho, I'm not deadset on the xml format if something is still clean and easy to use.
             */
             GtkAppRunner.Execute(
-                Deact.Deact.Create<WindowComponent, WindowProps>(new WindowProps(){ Title="DotNet React Window Title" })
-                /*new WindowComponent(), new Props() {
-                        {
-                            "Title", "DotNet React Window Title"
-                        }
-                    }, new List<IComponent>() {}
-                        */ /* 
-                    new HBoxComponent(), new Props(), new List<IComponent>() {
-                        new ComponentProcessor<EmptyState, LabelProps>(new LabelComponent(), new Props{
-                            {
-                                "Label", "Hello World"
+                Deact.Deact.Create<WindowComponent, WindowProps>(
+                    new WindowProps(){ Title="DotNet React Window Title" },
+                    new List<IComponent>() {
+                        Deact.Deact.Create<HBoxComponent, BoxProps>(
+                            new BoxProps() {},
+                            new List<IComponent>() {
+                                Deact.Deact.Create<LabelComponent, LabelProps>(
+                                    new LabelProps() {
+                                        Label="Label 1 Label"
+                                    }
+                                ),
+                                Deact.Deact.Create<ButtonComponent, ButtonProps>(
+                                    new ButtonProps() {
+                                        Label="Button 2 Label",
+                                        OnClick=() => { Console.WriteLine("Button 2 Click"); }
+                                    }
+                                )
                             }
-                        }),
-                        new ComponentProcessor<EmptyState, ButtonProps>(new ButtonComponent(), new Props{
-                            {
-                                "Label", "Hello World Button"
-                            },
-                            {
-                                "OnClick", (Action)(() => { Console.WriteLine("Button Click"); })
-                            }
-                        })*/
-                    //})
-                //}
+                        )
+                    }
+                )
             );
         }
     }

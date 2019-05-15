@@ -17,24 +17,23 @@ using Deact.Core;
 
 namespace Deact.Gtk.Components
 {
-    abstract public class BoxComponent<BoxType>: Component<EmptyState, BoxProps>, MGtkComponent<BoxType, BoxProps>
+    abstract public class BoxComponent<BoxType>: GtkComponent<BoxType, EmptyState, BoxProps>
     where BoxType: Box, new() {
-        public BoxType widget { get; private set; }
+        private BoxType _widget;
+        public override BoxType widget { get { return _widget; } }
 
-        protected override EmptyState GetInitialState() {
+        protected override EmptyState _GetInitialState() {
             return new EmptyState();
         }
 
-        protected override void _DidMount() {
-            BindEvents();
-
-            widget = new BoxType();
+        protected override void CreateWidget() {
+            _widget = new BoxType();
         }
 
         protected override RenderResult _Render() {
-            return null;
+            return new RenderResult(this.children);
         }
 
-        public void BindEvents() {}
+        protected override void BindEvents() {}
     }
 }
